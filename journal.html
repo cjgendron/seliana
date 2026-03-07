@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal — Seliana</title>
+<link href="https://fonts.googleapis.com/css2?family=Ruthie&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #2C5F7A; --slate: #3D5166; --chestnut: #8B5E3C;
+  --gold: #C9A84C; --mist: #A3C4D4; --neutral: #F5F8FA;
+  --white: #ffffff; --ink: #1E2A32; --ink-light: #6B7C87;
+}
+body { font-family: 'Outfit', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--neutral); } ::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 3px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 14px 60px; background: rgba(255,255,255,0.96); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(0,0,0,0.07); }
+.nav-logo { text-decoration: none; display: inline-flex; flex-direction: column; align-items: stretch; gap: 4px; user-select: none; }
+.nav-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.nav-logo-s { font-family: 'Ruthie', cursive; font-size: 42px; line-height: 0.85; color: var(--gold); }
+.nav-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: var(--ink); font-size: 19px; }
+.nav-logo-rest span { display: inline-block; }
+.nav-logo-rest .ke { letter-spacing: 0.04em; } .nav-logo-rest .kl { letter-spacing: 0.05em; } .nav-logo-rest .ki { letter-spacing: 0.05em; } .nav-logo-rest .ka1 { letter-spacing: 0.04em; } .nav-logo-rest .kn { letter-spacing: 0.02em; } .nav-logo-rest .ka2 { letter-spacing: 0; }
+.nav-logo-orn { display: flex; align-items: center; }
+.nav-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.75; }
+.nav-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--ink-light); transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 6px; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+
+/* PAGE HERO */
+.page-hero { background: var(--ink); padding: 140px 60px 80px; position: relative; overflow: hidden; }
+.page-hero-bg { position: absolute; inset: -10%; background-image: url('https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=1800&q=80'); background-size: cover; background-position: center 50%; opacity: 0.18; }
+.page-hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
+.page-hero-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; font-weight: 400; }
+.page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 76px); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 20px; }
+.page-hero h1 em { font-style: italic; color: var(--gold); }
+.page-hero-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 480px; line-height: 1.8; }
+
+/* FEATURED POST */
+.featured-section { padding: 80px 60px 0; }
+.featured-inner { max-width: 1100px; margin: 0 auto; }
+.section-tag { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 28px; }
+.featured-card { display: grid; grid-template-columns: 1.2fr 1fr; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 32px rgba(30,42,50,0.1); text-decoration: none; color: inherit; transition: transform 0.3s; }
+.featured-card:hover { transform: translateY(-4px); }
+.featured-img { position: relative; min-height: 460px; }
+.featured-img-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=1200&q=80'); background-size: cover; background-position: center; transition: transform 0.5s; }
+.featured-card:hover .featured-img-bg { transform: scale(1.03); }
+.featured-cat { position: absolute; top: 20px; left: 20px; background: var(--gold); color: white; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border-radius: 4px; font-weight: 500; }
+.featured-text { background: var(--white); padding: 52px 48px; display: flex; flex-direction: column; justify-content: center; }
+.featured-date { font-size: 11px; color: var(--ink-light); font-weight: 300; margin-bottom: 16px; }
+.featured-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 400; line-height: 1.2; color: var(--ink); margin-bottom: 20px; }
+.featured-excerpt { font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--ink-light); margin-bottom: 32px; }
+.btn-read { display: inline-block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); font-weight: 400; border-bottom: 1px solid rgba(44,95,122,0.35); padding-bottom: 3px; transition: border-color 0.2s; text-decoration: none; }
+.btn-read:hover { border-color: var(--primary); }
+
+/* POST GRID */
+.posts-section { padding: 80px 60px 120px; }
+.posts-inner { max-width: 1100px; margin: 0 auto; }
+.posts-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; flex-wrap: wrap; gap: 16px; }
+.posts-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; }
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-btn { padding: 7px 18px; border-radius: 20px; cursor: pointer; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; border: 1px solid transparent; font-family: 'Outfit', sans-serif; transition: all 0.2s; background: none; }
+.filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.filter-btn:not(.active) { border-color: rgba(44,95,122,0.22); color: var(--ink-light); }
+.filter-btn:not(.active):hover { border-color: var(--primary); color: var(--primary); }
+.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.post-card { border-radius: 12px; overflow: hidden; background: var(--white); border: 1px solid rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+.post-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(30,42,50,0.1); }
+.post-img { height: 200px; position: relative; overflow: hidden; }
+.post-img-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s; }
+.post-card:hover .post-img-bg { transform: scale(1.04); }
+.pi-1 { background-image: url('https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=700&q=75'); }
+.pi-2 { background-image: url('https://images.unsplash.com/photo-1553284965-5dd9f1677df1?w=700&q=75'); }
+.pi-3 { background-image: url('https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=700&q=75'); }
+.pi-4 { background-image: url('https://images.unsplash.com/photo-1449927863916-6dab08b8bde3?w=700&q=75'); }
+.post-cat-badge { position: absolute; bottom: 12px; left: 12px; background: var(--gold); color: white; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; font-weight: 500; }
+.post-body { padding: 24px 24px 28px; flex: 1; display: flex; flex-direction: column; }
+.post-date { font-size: 11px; color: var(--ink-light); font-weight: 300; margin-bottom: 10px; }
+.post-title { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 12px; }
+.post-excerpt { font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--ink-light); flex: 1; }
+
+/* FOOTER */
+footer { background: var(--ink); padding: 64px 60px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
+.footer-logo { display: inline-flex; flex-direction: column; align-items: stretch; gap: 5px; user-select: none; margin-bottom: 14px; }
+.footer-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.footer-logo-s { font-family: 'Ruthie', cursive; font-size: 52px; line-height: 0.85; color: var(--gold); }
+.footer-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: rgba(255,255,255,0.9); font-size: 24px; }
+.footer-logo-rest span { display: inline-block; }
+.footer-logo-rest .ke { letter-spacing: 0.04em; } .footer-logo-rest .kl { letter-spacing: 0.05em; } .footer-logo-rest .ki { letter-spacing: 0.05em; } .footer-logo-rest .ka1 { letter-spacing: 0.04em; } .footer-logo-rest .kn { letter-spacing: 0.02em; } .footer-logo-rest .ka2 { letter-spacing: 0; }
+.footer-logo-orn { display: flex; align-items: center; }
+.footer-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.7; }
+.footer-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.footer-tagline { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.35); max-width: 210px; }
+.footer-col h5 { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 18px; font-weight: 500; }
+.footer-col a { display: block; color: rgba(255,255,255,0.46); text-decoration: none; font-size: 13px; font-weight: 300; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 300; }
+.footer-rule { width: 28px; height: 2px; background: var(--gold); border-radius: 1px; }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; } .nav-links { display: none; } .nav-hamburger { display: flex; }
+  .featured-card { grid-template-columns: 1fr; } .featured-img { min-height: 280px; }
+  .posts-grid { grid-template-columns: 1fr 1fr; }
+  .page-hero, .featured-section, .posts-section { padding-left: 24px; padding-right: 24px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .posts-grid { grid-template-columns: 1fr; }
+  footer { padding: 52px 24px 28px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-name"><span class="nav-logo-s">S</span><span class="nav-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+    <div class="nav-logo-orn"><div class="nav-logo-orn-seg"></div><div class="nav-logo-orn-diamond"></div><div class="nav-logo-orn-seg"></div></div>
+  </a>
+  <div class="nav-links">
+    <a href="horses.html">Our Horses</a>
+    <a href="journal.html" class="active">Journal</a>
+    <a href="contact.html" class="nav-cta">Inquire</a>
+  </div>
+  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">The Seliana Journal</p>
+    <h1>Notes from<br><em>the field.</em></h1>
+    <p class="page-hero-sub">Stories from Iceland, thoughts on bloodlines, and honest writing about life with Icelandic horses.</p>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<section class="featured-section">
+  <div class="featured-inner">
+    <p class="section-tag reveal">Latest Post</p>
+    <a href="#" class="featured-card reveal">
+      <div class="featured-img">
+        <div class="featured-img-bg"></div>
+        <span class="featured-cat">Bloodlines</span>
+      </div>
+      <div class="featured-text">
+        <p class="featured-date">March 3, 2026</p>
+        <h2 class="featured-title">What Makes an Icelandic Horse Truly Exceptional?</h2>
+        <p class="featured-excerpt">We break down the traits we prioritize at Seliana — from FEIF scores to the temperament markers that don't always show up on a scorecard. After fourteen years, here's what we've learned.</p>
+        <span class="btn-read">Read Article →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- POSTS -->
+<section class="posts-section">
+  <div class="posts-inner">
+    <div class="posts-header">
+      <h2 class="reveal">All Posts</h2>
+      <div class="filter-row reveal">
+        <button class="filter-btn active" onclick="filterPosts('all',this)">All</button>
+        <button class="filter-btn" onclick="filterPosts('bloodlines',this)">Bloodlines</button>
+        <button class="filter-btn" onclick="filterPosts('foals',this)">Foals</button>
+        <button class="filter-btn" onclick="filterPosts('iceland',this)">Iceland Trips</button>
+        <button class="filter-btn" onclick="filterPosts('care',this)">Horse Care</button>
+      </div>
+    </div>
+    <div class="posts-grid">
+      <a href="#" class="post-card reveal" data-cat="foals">
+        <div class="post-img"><div class="post-img-bg pi-2"></div><span class="post-cat-badge">Foals</span></div>
+        <div class="post-body">
+          <p class="post-date">February 14, 2026</p>
+          <h3 class="post-title">Foal Season 2026: Meet This Year's Arrivals</h3>
+          <p class="post-excerpt">Six foals, four months, and a lot of sleepless nights. Here's an honest look at how foal season went — and who's coming with us into next year.</p>
+        </div>
+      </a>
+      <a href="#" class="post-card reveal" data-cat="iceland">
+        <div class="post-img"><div class="post-img-bg pi-3"></div><span class="post-cat-badge">Iceland Trip</span></div>
+        <div class="post-body">
+          <p class="post-date">January 28, 2026</p>
+          <h3 class="post-title">Our January Iceland Sourcing Trip: What We Found</h3>
+          <p class="post-excerpt">Every January we make the trip north. This year we evaluated 40 horses across three farms and came home with something unexpected.</p>
+        </div>
+      </a>
+      <a href="#" class="post-card reveal" data-cat="care">
+        <div class="post-img"><div class="post-img-bg pi-4"></div><span class="post-cat-badge">Horse Care</span></div>
+        <div class="post-body">
+          <p class="post-date">December 10, 2025</p>
+          <h3 class="post-title">Keeping Icelandics Healthy Through a US Winter</h3>
+          <p class="post-excerpt">Icelandic horses are bred for cold, but the US winter is different from Iceland's. What we've learned about keeping our herd thriving from November through March.</p>
+        </div>
+      </a>
+      <a href="#" class="post-card reveal" data-cat="bloodlines">
+        <div class="post-img"><div class="post-img-bg pi-1"></div><span class="post-cat-badge">Bloodlines</span></div>
+        <div class="post-body">
+          <p class="post-date">November 22, 2025</p>
+          <h3 class="post-title">The Stallions Behind Our 2025 Foal Crop</h3>
+          <p class="post-excerpt">A closer look at the three stallions we used this breeding season and why we chose each pairing for our mares.</p>
+        </div>
+      </a>
+      <a href="#" class="post-card reveal" data-cat="iceland">
+        <div class="post-img"><div class="post-img-bg pi-3"></div><span class="post-cat-badge">Iceland Trip</span></div>
+        <div class="post-body">
+          <p class="post-date">September 5, 2025</p>
+          <h3 class="post-title">Landsmót 2025: Our Notes from the National Championships</h3>
+          <p class="post-excerpt">We attended Landsmót for the eighth time this summer. The competition level was extraordinary. Here are the horses and bloodlines that stood out.</p>
+        </div>
+      </a>
+      <a href="#" class="post-card reveal" data-cat="care">
+        <div class="post-img"><div class="post-img-bg pi-2"></div><span class="post-cat-badge">Horse Care</span></div>
+        <div class="post-body">
+          <p class="post-date">July 18, 2025</p>
+          <h3 class="post-title">Transitioning Your Icelandic to a New Home: What to Expect</h3>
+          <p class="post-excerpt">We've delivered horses to 38 states. Here's the advice we give every buyer when their horse arrives — and what to do if the first week is rough.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-name"><span class="footer-logo-s">S</span><span class="footer-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+          <div class="footer-logo-orn"><div class="footer-logo-orn-seg"></div><div class="footer-logo-orn-diamond"></div><div class="footer-logo-orn-seg"></div></div>
+        </div>
+        <p class="footer-tagline">Icelandic horse breeders and importers placing exceptional horses across the US.</p>
+      </div>
+      <div class="footer-col"><h5>Horses</h5><a href="horses.html">Available Now</a><a href="horses.html">Foals</a><a href="contact.html">Custom Imports</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="index.html">Home</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h5>Follow</h5><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 Seliana. All rights reserved.</p><div class="footer-rule"></div></div>
+  </div>
+</footer>
+
+<script>
+function filterPosts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+  document.querySelectorAll('.post-card').forEach(card => { card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none'; });
+}
+const observer = new IntersectionObserver((entries) => { entries.forEach((e,i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i*80); observer.unobserve(e.target); } }); }, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+function toggleMenu() {
+  const links = document.querySelector('.nav-links'); const open = links.style.display === 'flex';
+  links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);padding:32px;gap:22px;z-index:199;border-top:1px solid rgba(0,0,0,0.07);';
+}
+</script>
+</body>
+</html>

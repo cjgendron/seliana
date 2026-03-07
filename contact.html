@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Seliana</title>
+<link href="https://fonts.googleapis.com/css2?family=Ruthie&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #2C5F7A; --slate: #3D5166; --chestnut: #8B5E3C;
+  --gold: #C9A84C; --mist: #A3C4D4; --neutral: #F5F8FA;
+  --white: #ffffff; --ink: #1E2A32; --ink-light: #6B7C87;
+}
+body { font-family: 'Outfit', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--neutral); } ::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 3px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 14px 60px; background: rgba(255,255,255,0.96); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(0,0,0,0.07); }
+.nav-logo { text-decoration: none; display: inline-flex; flex-direction: column; align-items: stretch; gap: 4px; user-select: none; }
+.nav-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.nav-logo-s { font-family: 'Ruthie', cursive; font-size: 42px; line-height: 0.85; color: var(--gold); }
+.nav-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: var(--ink); font-size: 19px; }
+.nav-logo-rest span { display: inline-block; }
+.nav-logo-rest .ke { letter-spacing: 0.04em; } .nav-logo-rest .kl { letter-spacing: 0.05em; } .nav-logo-rest .ki { letter-spacing: 0.05em; } .nav-logo-rest .ka1 { letter-spacing: 0.04em; } .nav-logo-rest .kn { letter-spacing: 0.02em; } .nav-logo-rest .ka2 { letter-spacing: 0; }
+.nav-logo-orn { display: flex; align-items: center; }
+.nav-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.75; }
+.nav-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--ink-light); transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 6px; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+
+/* PAGE HERO */
+.page-hero { background: var(--ink); padding: 140px 60px 80px; position: relative; overflow: hidden; }
+.page-hero-bg { position: absolute; inset: -10%; background-image: url('https://images.unsplash.com/photo-1449927863916-6dab08b8bde3?w=1800&q=80'); background-size: cover; background-position: center 40%; opacity: 0.16; }
+.page-hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
+.page-hero-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; font-weight: 400; }
+.page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 76px); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 20px; }
+.page-hero h1 em { font-style: italic; color: var(--gold); }
+.page-hero-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 480px; line-height: 1.8; }
+
+/* CONTACT BODY */
+.contact-section { padding: 90px 60px 120px; }
+.contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: start; }
+
+/* FORM */
+.form-block {}
+.form-block h2 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; margin-bottom: 10px; }
+.form-block h2 em { font-style: italic; color: var(--primary); }
+.form-lead { font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--ink-light); margin-bottom: 44px; }
+.contact-form { background: var(--neutral); border-radius: 18px; padding: 44px; border: 1px solid rgba(0,0,0,0.05); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
+.form-group:last-child { margin-bottom: 0; }
+.form-group label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; }
+.form-group input, .form-group select, .form-group textarea { background: var(--white); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 13px 16px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; color: var(--ink); outline: none; transition: border-color 0.2s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(30,42,50,0.3); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-submit { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; transition: background 0.2s, transform 0.2s; margin-top: 8px; }
+.form-submit:hover { background: var(--slate); transform: translateY(-1px); }
+
+/* SIDEBAR */
+.contact-sidebar {}
+.sidebar-block { margin-bottom: 40px; }
+.sidebar-block h4 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 18px; color: var(--ink); }
+.contact-detail { margin-bottom: 20px; }
+.cd-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 5px; }
+.cd-val { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--ink); }
+.sidebar-divider { height: 1px; background: rgba(0,0,0,0.07); margin: 36px 0; }
+.sidebar-quote { border-left: 2px solid var(--gold); padding-left: 20px; }
+.sidebar-quote p { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; font-weight: 300; color: var(--slate); line-height: 1.6; margin-bottom: 12px; }
+.sidebar-quote cite { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-light); font-style: normal; }
+.promise-list { list-style: none; }
+.promise-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; font-weight: 300; color: var(--ink-light); line-height: 1.6; margin-bottom: 14px; }
+.promise-list li::before { content: '◆'; font-size: 6px; color: var(--gold); margin-top: 6px; flex-shrink: 0; }
+
+/* FOOTER */
+footer { background: var(--ink); padding: 64px 60px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
+.footer-logo { display: inline-flex; flex-direction: column; align-items: stretch; gap: 5px; user-select: none; margin-bottom: 14px; }
+.footer-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.footer-logo-s { font-family: 'Ruthie', cursive; font-size: 52px; line-height: 0.85; color: var(--gold); }
+.footer-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: rgba(255,255,255,0.9); font-size: 24px; }
+.footer-logo-rest span { display: inline-block; }
+.footer-logo-rest .ke { letter-spacing: 0.04em; } .footer-logo-rest .kl { letter-spacing: 0.05em; } .footer-logo-rest .ki { letter-spacing: 0.05em; } .footer-logo-rest .ka1 { letter-spacing: 0.04em; } .footer-logo-rest .kn { letter-spacing: 0.02em; } .footer-logo-rest .ka2 { letter-spacing: 0; }
+.footer-logo-orn { display: flex; align-items: center; }
+.footer-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.7; }
+.footer-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.footer-tagline { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.35); max-width: 210px; }
+.footer-col h5 { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 18px; font-weight: 500; }
+.footer-col a { display: block; color: rgba(255,255,255,0.46); text-decoration: none; font-size: 13px; font-weight: 300; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 300; }
+.footer-rule { width: 28px; height: 2px; background: var(--gold); border-radius: 1px; }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; } .nav-links { display: none; } .nav-hamburger { display: flex; }
+  .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+  .contact-section, .page-hero { padding-left: 24px; padding-right: 24px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) { footer { padding: 52px 24px 28px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-name"><span class="nav-logo-s">S</span><span class="nav-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+    <div class="nav-logo-orn"><div class="nav-logo-orn-seg"></div><div class="nav-logo-orn-diamond"></div><div class="nav-logo-orn-seg"></div></div>
+  </a>
+  <div class="nav-links">
+    <a href="horses.html">Our Horses</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html" class="nav-cta active">Inquire</a>
+  </div>
+  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Get in Touch</p>
+    <h1>Let's find your<br><em>horse.</em></h1>
+    <p class="page-hero-sub">Tell us what you're looking for and a little about yourself. We reply to every inquiry personally, within 48 hours.</p>
+  </div>
+</div>
+
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <div class="form-block">
+      <h2 class="reveal">Send us a<br><em>message.</em></h2>
+      <p class="form-lead reveal">Whether you have a specific horse in mind or just want to start a conversation, we're glad you reached out.</p>
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Your first name"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+          <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="(000) 000-0000"></div>
+        </div>
+        <div class="form-group">
+          <label>I'm interested in</label>
+          <select>
+            <option value="">Select one...</option>
+            <option>A specific horse on the site</option>
+            <option>A 2025 or 2026 foal</option>
+            <option>Breeding stock</option>
+            <option>A custom Iceland import</option>
+            <option>General information about the breed</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your experience level</label>
+          <select>
+            <option value="">Select one...</option>
+            <option>New to horses</option>
+            <option>Some experience, new to Icelandics</option>
+            <option>Experienced with Icelandics</option>
+            <option>Competitive / professional rider</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about yourself</label>
+          <textarea placeholder="Your goals, your setup, what you're hoping to do with an Icelandic horse, your location — anything you'd like us to know."></textarea>
+        </div>
+        <button class="form-submit">Send Inquiry →</button>
+      </div>
+    </div>
+
+    <div class="contact-sidebar reveal">
+      <div class="sidebar-block">
+        <h4>Reach us directly</h4>
+        <div class="contact-detail"><p class="cd-label">Email</p><p class="cd-val">hello@seliana.com</p></div>
+        <div class="contact-detail"><p class="cd-label">Phone</p><p class="cd-val">(555) 000-0000</p></div>
+        <div class="contact-detail"><p class="cd-label">Based in</p><p class="cd-val">United States</p></div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-block">
+        <h4>What to expect</h4>
+        <ul class="promise-list">
+          <li>We reply to every inquiry within 48 hours — often same day.</li>
+          <li>We'll ask questions before we make suggestions. A good match matters more than a quick sale.</li>
+          <li>We can arrange video calls, farm visits, and trial periods where appropriate.</li>
+          <li>We handle transport coordination and paperwork, including across state lines.</li>
+        </ul>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-quote">
+        <p>"We don't move volume. We make matches. The right horse in the right hands — that's the whole point."</p>
+        <cite>— Seliana</cite>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-name"><span class="footer-logo-s">S</span><span class="footer-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+          <div class="footer-logo-orn"><div class="footer-logo-orn-seg"></div><div class="footer-logo-orn-diamond"></div><div class="footer-logo-orn-seg"></div></div>
+        </div>
+        <p class="footer-tagline">Icelandic horse breeders and importers placing exceptional horses across the US.</p>
+      </div>
+      <div class="footer-col"><h5>Horses</h5><a href="horses.html">Available Now</a><a href="horses.html">Foals</a><a href="contact.html">Custom Imports</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="index.html">Home</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h5>Follow</h5><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 Seliana. All rights reserved.</p><div class="footer-rule"></div></div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach((e,i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i*80); observer.unobserve(e.target); } }); }, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+function toggleMenu() {
+  const links = document.querySelector('.nav-links'); const open = links.style.display === 'flex';
+  links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);padding:32px;gap:22px;z-index:199;border-top:1px solid rgba(0,0,0,0.07);';
+}
+document.querySelector('.form-submit').addEventListener('click', function(e) {
+  this.textContent = 'Sent ✓';
+  this.style.background = '#4a8c6e';
+  setTimeout(() => { this.textContent = 'Send Inquiry →'; this.style.background = ''; }, 3000);
+});
+</script>
+</body>
+</html>

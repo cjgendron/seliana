@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Horses — Seliana</title>
+<link href="https://fonts.googleapis.com/css2?family=Ruthie&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #2C5F7A; --slate: #3D5166; --chestnut: #8B5E3C;
+  --gold: #C9A84C; --mist: #A3C4D4; --neutral: #F5F8FA;
+  --white: #ffffff; --ink: #1E2A32; --ink-light: #6B7C87;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--neutral); } ::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 3px; }
+
+/* ─── NAV (solid on interior pages) ─── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 14px 60px; background: rgba(255,255,255,0.96); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(0,0,0,0.07); transition: padding 0.3s; }
+.nav-logo { text-decoration: none; display: inline-flex; flex-direction: column; align-items: stretch; gap: 4px; user-select: none; }
+.nav-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.nav-logo-s { font-family: 'Ruthie', cursive; font-size: 42px; line-height: 0.85; color: var(--gold); }
+.nav-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: var(--ink); font-size: 19px; }
+.nav-logo-rest span { display: inline-block; }
+.nav-logo-rest .ke { letter-spacing: 0.04em; } .nav-logo-rest .kl { letter-spacing: 0.05em; }
+.nav-logo-rest .ki { letter-spacing: 0.05em; } .nav-logo-rest .ka1 { letter-spacing: 0.04em; }
+.nav-logo-rest .kn { letter-spacing: 0.02em; } .nav-logo-rest .ka2 { letter-spacing: 0; }
+.nav-logo-orn { display: flex; align-items: center; }
+.nav-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.75; }
+.nav-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--ink-light); transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 6px; }
+.nav-cta:hover { opacity: 0.85; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+
+/* ─── PAGE HERO ─── */
+.page-hero { background: var(--ink); padding: 140px 60px 80px; position: relative; overflow: hidden; }
+.page-hero-bg { position: absolute; inset: -10%; background-image: url('https://images.unsplash.com/photo-1449927863916-6dab08b8bde3?w=1800&q=80'); background-size: cover; background-position: center 30%; opacity: 0.22; }
+.page-hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
+.page-hero-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; font-weight: 400; }
+.page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 76px); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 20px; }
+.page-hero h1 em { font-style: italic; color: var(--gold); }
+.page-hero-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 520px; line-height: 1.8; }
+
+/* ─── HORSES ─── */
+.horses-section { background: var(--neutral); padding: 80px 60px 120px; }
+.horses-inner { max-width: 1100px; margin: 0 auto; }
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+.filter-btn { padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; border: 1px solid transparent; font-family: 'Outfit', sans-serif; transition: all 0.2s; background: none; }
+.filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.filter-btn:not(.active) { border-color: rgba(44,95,122,0.22); color: var(--ink-light); }
+.filter-btn:not(.active):hover { border-color: var(--primary); color: var(--primary); }
+.horses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.horse-card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 24px rgba(30,42,50,0.07); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+.horse-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(30,42,50,0.13); }
+.horse-img { height: 240px; position: relative; overflow: hidden; }
+.horse-img-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
+.horse-card:hover .horse-img-bg { transform: scale(1.05); }
+.hi-1 { background-image: url('https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=800&q=75'); }
+.hi-2 { background-image: url('https://images.unsplash.com/photo-1553284965-5dd9f1677df1?w=800&q=75'); }
+.hi-3 { background-image: url('https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=800&q=75'); }
+.hi-4 { background-image: url('https://images.unsplash.com/photo-1449927863916-6dab08b8bde3?w=800&q=75'); }
+.hi-5 { background-image: url('https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=800&q=75'); background-position: center 60%; }
+.hi-6 { background-image: url('https://images.unsplash.com/photo-1553284965-5dd9f1677df1?w=800&q=75'); background-position: center 30%; }
+.horse-badge { position: absolute; top: 14px; left: 14px; z-index: 2; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; padding: 5px 12px; border-radius: 4px; color: white; }
+.badge-avail { background: var(--gold); }
+.badge-reserved { background: rgba(61,81,102,0.85); backdrop-filter: blur(6px); }
+.badge-foal { background: var(--chestnut); }
+.horse-body { padding: 22px 24px 24px; }
+.horse-breed-line { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--mist); font-weight: 500; margin-bottom: 5px; }
+.horse-name { font-family: 'Cormorant Garamond', serif; font-size: 23px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.horse-meta { font-size: 12px; color: var(--ink-light); font-weight: 300; margin-bottom: 14px; }
+.horse-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.horse-tag { font-size: 10px; padding: 4px 10px; border-radius: 10px; background: var(--neutral); color: var(--ink-light); }
+.horse-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.05); }
+.horse-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--primary); }
+.horse-price small { display: block; font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-light); font-weight: 300; }
+.btn-view { background: none; border: 1px solid var(--primary); color: var(--primary); padding: 8px 18px; border-radius: 6px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; transition: all 0.2s; }
+.btn-view:hover { background: var(--primary); color: white; }
+
+/* ─── HORSE DETAIL (full-page overlay) ─── */
+.horse-detail { display: none; position: fixed; inset: 0; z-index: 500; background: var(--white); overflow-y: auto; }
+.horse-detail.open { display: block; }
+.detail-close { position: fixed; top: 24px; right: 32px; z-index: 600; background: var(--ink); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.detail-close:hover { background: var(--primary); }
+.detail-hero { height: 60vh; min-height: 400px; position: relative; overflow: hidden; }
+.detail-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.detail-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,35,45,0.75) 0%, rgba(20,35,45,0.1) 60%); }
+.detail-hero-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 48px 60px; z-index: 2; }
+.detail-breed { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.detail-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 300; color: white; margin-bottom: 8px; }
+.detail-subtitle { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 300; }
+.detail-body { max-width: 1100px; margin: 0 auto; padding: 60px; display: grid; grid-template-columns: 1fr 340px; gap: 60px; }
+.detail-desc h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--ink); margin-bottom: 20px; }
+.detail-desc p { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--ink-light); margin-bottom: 20px; }
+.detail-scores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 36px 0; }
+.score-item { background: var(--neutral); border-radius: 10px; padding: 18px; text-align: center; }
+.score-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--primary); line-height: 1; }
+.score-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-light); margin-top: 5px; }
+.detail-sidebar { }
+.detail-card { background: var(--neutral); border-radius: 16px; padding: 32px; margin-bottom: 20px; }
+.detail-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--ink); }
+.detail-spec { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 13px; }
+.detail-spec:last-child { border-bottom: none; }
+.spec-label { color: var(--ink-light); font-weight: 300; }
+.spec-val { color: var(--ink); font-weight: 500; }
+.detail-cta { background: var(--primary); color: white; border: none; width: 100%; padding: 15px; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.detail-cta:hover { background: var(--slate); }
+.detail-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 36px; }
+.gallery-img { border-radius: 10px; overflow: hidden; height: 200px; }
+.gallery-img div { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.4s; }
+.gallery-img:hover div { transform: scale(1.04); }
+
+/* ─── FOOTER ─── */
+footer { background: var(--ink); padding: 64px 60px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
+.footer-logo { display: inline-flex; flex-direction: column; align-items: stretch; gap: 5px; user-select: none; margin-bottom: 14px; }
+.footer-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.footer-logo-s { font-family: 'Ruthie', cursive; font-size: 52px; line-height: 0.85; color: var(--gold); }
+.footer-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: rgba(255,255,255,0.9); font-size: 24px; }
+.footer-logo-rest span { display: inline-block; }
+.footer-logo-rest .ke { letter-spacing: 0.04em; } .footer-logo-rest .kl { letter-spacing: 0.05em; }
+.footer-logo-rest .ki { letter-spacing: 0.05em; } .footer-logo-rest .ka1 { letter-spacing: 0.04em; }
+.footer-logo-rest .kn { letter-spacing: 0.02em; } .footer-logo-rest .ka2 { letter-spacing: 0; }
+.footer-logo-orn { display: flex; align-items: center; }
+.footer-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.7; }
+.footer-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.footer-tagline { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.35); max-width: 210px; }
+.footer-col h5 { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 18px; font-weight: 500; }
+.footer-col a { display: block; color: rgba(255,255,255,0.46); text-decoration: none; font-size: 13px; font-weight: 300; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 300; }
+.footer-rule { width: 28px; height: 2px; background: var(--gold); border-radius: 1px; }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .horses-grid { grid-template-columns: 1fr 1fr; }
+  .detail-body { grid-template-columns: 1fr; padding: 32px 24px; }
+  .page-hero { padding: 110px 24px 60px; }
+  .horses-section { padding: 60px 24px 80px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .horses-grid { grid-template-columns: 1fr; }
+  .detail-scores { grid-template-columns: 1fr 1fr; }
+  footer { padding: 52px 24px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-name"><span class="nav-logo-s">S</span><span class="nav-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+    <div class="nav-logo-orn"><div class="nav-logo-orn-seg"></div><div class="nav-logo-orn-diamond"></div><div class="nav-logo-orn-seg"></div></div>
+  </a>
+  <div class="nav-links">
+    <a href="horses.html" class="active">Our Horses</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html" class="nav-cta">Inquire</a>
+  </div>
+  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Available Horses</p>
+    <h1>Find your<br><em>perfect match.</em></h1>
+    <p class="page-hero-sub">Each horse is individually selected, thoroughly evaluated, and placed with care. Browse what's available — and reach out if you don't see exactly what you're looking for.</p>
+  </div>
+</div>
+
+<!-- HORSES LISTING -->
+<section class="horses-section">
+  <div class="horses-inner">
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterHorses('all',this)">All Horses</button>
+      <button class="filter-btn" onclick="filterHorses('sport',this)">Sport</button>
+      <button class="filter-btn" onclick="filterHorses('leisure',this)">Leisure</button>
+      <button class="filter-btn" onclick="filterHorses('breeding',this)">Breeding</button>
+      <button class="filter-btn" onclick="filterHorses('foal',this)">Foals</button>
+    </div>
+    <div class="horses-grid">
+
+      <a class="horse-card reveal" data-cat="sport" onclick="openDetail('eldur');return false;" href="#">
+        <div class="horse-img"><div class="horse-img-bg hi-1"></div><span class="horse-badge badge-avail">Available</span></div>
+        <div class="horse-body">
+          <p class="horse-breed-line">Icelandic Horse · Stallion</p>
+          <h3 class="horse-name">Eldur frá Seliana</h3>
+          <p class="horse-meta">8 yrs · Chestnut · 13.3hh</p>
+          <div class="horse-tags"><span class="horse-tag">Tölt</span><span class="horse-tag">Five-gaited</span><span class="horse-tag">FEIF 8.2</span></div>
+          <div class="horse-footer">
+            <div class="horse-price"><small>Asking</small>$18,500</div>
+            <button class="btn-view">View Horse</button>
+          </div>
+        </div>
+      </a>
+
+      <a class="horse-card reveal" data-cat="leisure" onclick="openDetail('sol');return false;" href="#">
+        <div class="horse-img"><div class="horse-img-bg hi-2"></div><span class="horse-badge badge-avail">Available</span></div>
+        <div class="horse-body">
+          <p class="horse-breed-line">Icelandic Horse · Mare</p>
+          <h3 class="horse-name">Sól frá Seliana</h3>
+          <p class="horse-meta">6 yrs · Silver Dapple · 13.1hh</p>
+          <div class="horse-tags"><span class="horse-tag">Tölt</span><span class="horse-tag">Family Horse</span><span class="horse-tag">FEIF 7.8</span></div>
+          <div class="horse-footer">
+            <div class="horse-price"><small>Asking</small>$14,200</div>
+            <button class="btn-view">View Horse</button>
+          </div>
+        </div>
+      </a>
+
+      <a class="horse-card reveal" data-cat="breeding" onclick="openDetail('stjarna');return false;" href="#">
+        <div class="horse-img"><div class="horse-img-bg hi-3"></div><span class="horse-badge badge-reserved">Reserved</span></div>
+        <div class="horse-body">
+          <p class="horse-breed-line">Icelandic Horse · Mare</p>
+          <h3 class="horse-name">Stjarna frá Seliana</h3>
+          <p class="horse-meta">10 yrs · Black · 13.2hh</p>
+          <div class="horse-tags"><span class="horse-tag">Breeding</span><span class="horse-tag">Four-gaited</span><span class="horse-tag">FEIF 8.0</span></div>
+          <div class="horse-footer">
+            <div class="horse-price"><small>Asking</small>$22,000</div>
+            <button class="btn-view">View Horse</button>
+          </div>
+        </div>
+      </a>
+
+      <a class="horse-card reveal" data-cat="sport" onclick="openDetail('vidir');return false;" href="#">
+        <div class="horse-img"><div class="horse-img-bg hi-4"></div><span class="horse-badge badge-avail">Available</span></div>
+        <div class="horse-body">
+          <p class="horse-breed-line">Icelandic Horse · Gelding</p>
+          <h3 class="horse-name">Viðir frá Seliana</h3>
+          <p class="horse-meta">5 yrs · Bay · 13.2hh</p>
+          <div class="horse-tags"><span class="horse-tag">Tölt</span><span class="horse-tag">Sport Prospect</span><span class="horse-tag">FEIF 8.5</span></div>
+          <div class="horse-footer">
+            <div class="horse-price"><small>Asking</small>$16,800</div>
+            <button class="btn-view">View Horse</button>
+          </div>
+        </div>
+      </a>
+
+      <a class="horse-card reveal" data-cat="foal" onclick="openDetail('ljomi');return false;" href="#">
+        <div class="horse-img"><div class="horse-img-bg hi-5"></div><span class="horse-badge badge-foal">2025 Foal</span></div>
+        <div class="horse-body">
+          <p class="horse-breed-line">Icelandic Horse · Colt</p>
+          <h3 class="horse-name">Ljómi frá Seliana</h3>
+          <p class="horse-meta">1 yr · Palomino · Est. 13.3hh</p>
+          <div class="horse-tags"><span class="horse-tag">2025 Foal</span><span class="horse-tag">Pending Eval</span></div>
+          <div class="horse-footer">
+            <div class="horse-price"><small>Price on</small>Request</div>
+            <button class="btn-view">View Horse</button>
+          </div>
+        </div>
+      </a>
+
+      <a class="horse-card reveal" data-cat="leisure" onclick="openDetail('brimir');return false;" href="#">
+        <div class="horse-img"><div class="horse-img-bg hi-6"></div><span class="horse-badge badge-avail">Available</span></div>
+        <div class="horse-body">
+          <p class="horse-breed-line">Icelandic Horse · Gelding</p>
+          <h3 class="horse-name">Brimir frá Seliana</h3>
+          <p class="horse-meta">12 yrs · Grey · 13.0hh</p>
+          <div class="horse-tags"><span class="horse-tag">Beginner Safe</span><span class="horse-tag">Trail</span><span class="horse-tag">FEIF 7.4</span></div>
+          <div class="horse-footer">
+            <div class="horse-price"><small>Asking</small>$11,500</div>
+            <button class="btn-view">View Horse</button>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-name"><span class="footer-logo-s">S</span><span class="footer-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+          <div class="footer-logo-orn"><div class="footer-logo-orn-seg"></div><div class="footer-logo-orn-diamond"></div><div class="footer-logo-orn-seg"></div></div>
+        </div>
+        <p class="footer-tagline">Icelandic horse breeders and importers placing exceptional horses across the US.</p>
+      </div>
+      <div class="footer-col"><h5>Horses</h5><a href="horses.html">Available Now</a><a href="horses.html">Foals</a><a href="contact.html">Custom Imports</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="index.html">Home</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h5>Follow</h5><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 Seliana. All rights reserved.</p><div class="footer-rule"></div></div>
+  </div>
+</footer>
+
+<!-- HORSE DETAIL OVERLAY -->
+<div class="horse-detail" id="horseDetail">
+  <button class="detail-close" onclick="closeDetail()">✕</button>
+  <div class="detail-hero">
+    <div class="detail-hero-bg" id="detailBg"></div>
+    <div class="detail-hero-overlay"></div>
+    <div class="detail-hero-info">
+      <p class="detail-breed" id="detailBreed"></p>
+      <h1 class="detail-name" id="detailName"></h1>
+      <p class="detail-subtitle" id="detailSubtitle"></p>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="detail-desc">
+      <h3 id="detailHeadline"></h3>
+      <p id="detailP1"></p>
+      <p id="detailP2"></p>
+      <div class="detail-scores" id="detailScores"></div>
+      <div class="detail-gallery" id="detailGallery"></div>
+    </div>
+    <div class="detail-sidebar">
+      <div class="detail-card">
+        <h4>Horse Details</h4>
+        <div id="detailSpecs"></div>
+      </div>
+      <div class="detail-card">
+        <h4>Interested?</h4>
+        <p style="font-size:13px;color:var(--ink-light);line-height:1.7;margin-bottom:20px;">We reply to every inquiry personally, usually within 24 hours.</p>
+        <button class="detail-cta" onclick="window.location.href='contact.html'">Send an Inquiry</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const horses = {
+  eldur: {
+    breed: 'Icelandic Horse · Stallion', name: 'Eldur frá Seliana', subtitle: '8 years · Chestnut · 13.3hh',
+    bg: 'https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=1800&q=80',
+    headline: 'A five-gaited stallion of exceptional quality.',
+    p1: 'Eldur is one of our most celebrated stallions — a chestnut with a flaxen mane and the kind of natural tölt that turns heads in any arena. His movement is fluid, his temperament steady, and his work ethic is extraordinary.',
+    p2: 'Bred from two of Iceland\'s top sport lines, Eldur has competed at regional level and earned consistent praise from judges for his rhythm and impulsion. He\'s ready for a serious sport home or a high-quality breeding program.',
+    scores: [{num:'8.2',label:'FEIF Overall'},{num:'8.6',label:'Tölt'},{num:'8.0',label:'Trot'}],
+    specs: [['Age','8 years'],['Color','Chestnut / Flaxen'],['Height','13.3hh'],['Gaits','Five-gaited'],['Status','Available'],['Price','$18,500']],
+    imgs: ['hi-1','hi-3','hi-2','hi-4']
+  },
+  sol: {
+    breed: 'Icelandic Horse · Mare', name: 'Sól frá Seliana', subtitle: '6 years · Silver Dapple · 13.1hh',
+    bg: 'https://images.unsplash.com/photo-1553284965-5dd9f1677df1?w=1800&q=80',
+    headline: 'A gentle, willing mare with a gift for tölt.',
+    p1: 'Sól is the kind of horse that makes you fall in love with the breed. Her tölt is smooth and cadenced, her temperament soft and forgiving, and her eye kind. She\'s suitable for intermediate to experienced adult riders.',
+    p2: 'She\'s been trail-ridden extensively and is completely quiet in new environments. Sound, up-to-date on all care, and ready to move to her permanent home.',
+    scores: [{num:'7.8',label:'FEIF Overall'},{num:'8.1',label:'Tölt'},{num:'7.5',label:'Walk'}],
+    specs: [['Age','6 years'],['Color','Silver Dapple'],['Height','13.1hh'],['Gaits','Four-gaited'],['Status','Available'],['Price','$14,200']],
+    imgs: ['hi-2','hi-5','hi-3','hi-6']
+  },
+  stjarna: {
+    breed: 'Icelandic Horse · Mare', name: 'Stjarna frá Seliana', subtitle: '10 years · Black · 13.2hh',
+    bg: 'https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=1800&q=80',
+    headline: 'A premier breeding mare with exceptional pedigree.',
+    p1: 'Stjarna is a rare mare — black as pitch with a pedigree that reads like a who\'s who of Icelandic breeding. She has produced two foals that have gone on to compete at national level.',
+    p2: 'Currently reserved, but we occasionally have similar mares available. Contact us to be added to our waiting list for breeding stock.',
+    scores: [{num:'8.0',label:'FEIF Overall'},{num:'7.9',label:'Offspring'},{num:'8.2',label:'Type'}],
+    specs: [['Age','10 years'],['Color','Black'],['Height','13.2hh'],['Gaits','Four-gaited'],['Status','Reserved'],['Price','$22,000']],
+    imgs: ['hi-3','hi-1','hi-4','hi-2']
+  },
+  vidir: {
+    breed: 'Icelandic Horse · Gelding', name: 'Viðir frá Seliana', subtitle: '5 years · Bay · 13.2hh',
+    bg: 'https://images.unsplash.com/photo-1449927863916-6dab08b8bde3?w=1800&q=80',
+    headline: 'A young sport prospect with enormous potential.',
+    p1: 'Viðir is five years old and already scoring at a level that puts most mature horses to shame. His tölt has natural suspension and his flying pace is powerful and controlled. He\'s at the beginning of a serious sport career.',
+    p2: 'He needs an experienced rider who can develop his training correctly. The upside is immense — his trainer believes he\'s a future World Championships horse.',
+    scores: [{num:'8.5',label:'FEIF Overall'},{num:'8.8',label:'Tölt'},{num:'8.3',label:'Pace'}],
+    specs: [['Age','5 years'],['Color','Bay'],['Height','13.2hh'],['Gaits','Five-gaited'],['Status','Available'],['Price','$16,800']],
+    imgs: ['hi-4','hi-1','hi-5','hi-3']
+  },
+  ljomi: {
+    breed: 'Icelandic Horse · Colt · 2025 Foal', name: 'Ljómi frá Seliana', subtitle: '1 year · Palomino · Est. 13.3hh',
+    bg: 'https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=1800&q=80',
+    headline: 'Our most exciting 2025 foal — a palomino with presence.',
+    p1: 'Ljómi arrived in April 2025 and immediately captured everyone\'s attention. His palomino color is striking, his movement naturally uphill, and he carries himself with a confidence unusual for a foal of his age.',
+    p2: 'He\'ll undergo formal evaluation at 18 months. We anticipate strong scores. Price available on request — inquire early as our foals typically find homes before formal listing.',
+    scores: [{num:'TBD',label:'FEIF Eval'},{num:'2025',label:'Birth Year'},{num:'Palomino',label:'Color'}],
+    specs: [['Age','1 year (2025 foal)'],['Color','Palomino'],['Est. Height','13.3hh'],['Status','Available'],['Price','On Request']],
+    imgs: ['hi-5','hi-2','hi-6','hi-1']
+  },
+  brimir: {
+    breed: 'Icelandic Horse · Gelding', name: 'Brimir frá Seliana', subtitle: '12 years · Grey · 13.0hh',
+    bg: 'https://images.unsplash.com/photo-1553284965-5dd9f1677df1?w=1800&q=80',
+    headline: 'A steady, safe, and supremely loveable trail horse.',
+    p1: 'Brimir is the horse for the rider who wants to enjoy their horse, not worry about their horse. He\'s been a lesson horse, a trail horse, and a trusted partner for three different families over his life.',
+    p2: 'Sound, easy to handle on the ground and under saddle, and genuinely kind. He would be an ideal first Icelandic for an adult or a confident child with some experience.',
+    scores: [{num:'7.4',label:'FEIF Overall'},{num:'7.6',label:'Walk'},{num:'7.2',label:'Tölt'}],
+    specs: [['Age','12 years'],['Color','Grey'],['Height','13.0hh'],['Gaits','Four-gaited'],['Status','Available'],['Price','$11,500']],
+    imgs: ['hi-6','hi-2','hi-5','hi-3']
+  }
+};
+
+function openDetail(id) {
+  const h = horses[id]; if (!h) return;
+  document.getElementById('detailBreed').textContent = h.breed;
+  document.getElementById('detailName').textContent = h.name;
+  document.getElementById('detailSubtitle').textContent = h.subtitle;
+  document.getElementById('detailBg').style.backgroundImage = `url('${h.bg}')`;
+  document.getElementById('detailHeadline').textContent = h.headline;
+  document.getElementById('detailP1').textContent = h.p1;
+  document.getElementById('detailP2').textContent = h.p2;
+  document.getElementById('detailScores').innerHTML = h.scores.map(s => `<div class="score-item"><div class="score-num">${s.num}</div><div class="score-label">${s.label}</div></div>`).join('');
+  document.getElementById('detailSpecs').innerHTML = h.specs.map(s => `<div class="detail-spec"><span class="spec-label">${s[0]}</span><span class="spec-val">${s[1]}</span></div>`).join('');
+  const imgMap = { 'hi-1':'https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=800&q=75', 'hi-2':'https://images.unsplash.com/photo-1553284965-5dd9f1677df1?w=800&q=75', 'hi-3':'https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=800&q=75', 'hi-4':'https://images.unsplash.com/photo-1449927863916-6dab08b8bde3?w=800&q=75', 'hi-5':'https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=800&q=75', 'hi-6':'https://images.unsplash.com/photo-1553284965-5dd9f1677df1?w=800&q=75' };
+  document.getElementById('detailGallery').innerHTML = h.imgs.map(i => `<div class="gallery-img"><div style="background-image:url('${imgMap[i]}')"></div></div>`).join('');
+  const el = document.getElementById('horseDetail');
+  el.classList.add('open');
+  el.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail() {
+  document.getElementById('horseDetail').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+function filterHorses(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.horse-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+const observer = new IntersectionObserver((entries) => { entries.forEach((e,i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i*90); observer.unobserve(e.target); } }); }, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);padding:32px;gap:22px;z-index:199;border-top:1px solid rgba(0,0,0,0.07);';
+}
+</script>
+</body>
+</html>
