@@ -218,12 +218,13 @@ nav.scrolled .nav-hamburger span, nav.solid .nav-hamburger span { background: va
 /* ─── PARALLAX BANNER ─── */
 .parallax-banner { height: 520px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .parallax-banner-bg { position: absolute; inset: -15%; background-size: cover; background-position: center; will-change: transform; }
-.pb-1 { background-image: url('https://images.unsplash.com/photo-1659708709070-ba69255865b0?q=80&w=2670'); }
+.pb-1 { background-image: url('windy.JPG'); }
 .parallax-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(20,35,45,0.72) 0%, rgba(20,35,45,0.35) 60%, rgba(20,35,45,0.1) 100%); }
 .parallax-banner-content { position: relative; z-index: 2; max-width: 1100px; width: 100%; padding: 0 60px; }
 .parallax-banner-content .section-tag { color: rgba(201,168,76,0.9); }
-.parallax-banner-content .section-h { max-width: 520px; margin-bottom: 18px; }
-.parallax-banner-content .body-text { color: rgba(255,255,255,0.6); max-width: 420px; margin-bottom: 36px; }
+/*.parallax-banner-content .section-h { max-width: 520px; margin-bottom: 18px; }*/
+.parallax-banner-content .section-h { margin-bottom: 18px; }
+.parallax-banner-content .body-text { color: rgba(255,255,255,0.75); max-width: 420px; margin-bottom: 36px; }
 
 /* ─── TEXT SECTION ─── */
 .text-section { background: #F5F8FA; padding: 100px 60px; }
@@ -343,8 +344,8 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
     <h1>Straight from Iceland.<br><em>Straight with you.</em></h1>
     <p class="hero-sub">We breed, import, and place exceptional Icelandic horses with families and programs across the United States.</p>
     <div class="hero-btns">
-      <a href="#" class="btn-gold">Primary Action</a>
-      <a href="#" class="btn-outline">Secondary Action</a>
+      <a href="#" class="btn-gold">View Available Horses</a>
+      <a href="#" class="btn-outline">Learn More</a>
     </div>
   </div>
   <div class="hero-scroll-hint">
@@ -373,10 +374,27 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
   <div class="parallax-banner-bg pb-1" id="bannerBg"></div>
   <div class="parallax-banner-overlay"></div>
   <div class="parallax-banner-content">
-    <p class="section-tag reveal">Section Tag</p>
-    <h2 class="section-h light reveal">Lorem ipsum dolor<br><em>sit amet.</em></h2>
-    <p class="body-text reveal">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
+    <p class="section-tag reveal">Why Seliana?</p>
+    <h2 class="section-h light reveal">We're not brokers.<br>We're horse people, <em>just like you.</em></h2>
+    <p class="body-text reveal">
+      We don't list horses for other people. We don't take commissions on horses we haven't touched.<br>
+      Every horse at Seliana has been ours first. When they leave our hands, we know what we're sending you.
+    </p>
     <a href="#" class="btn-gold reveal">Call to Action</a>
+  </div>
+</section>
+
+<!-- TEXT SECTION -->
+<section class="text-section">
+  <div class="text-section-inner">
+    <p class="section-tag reveal">Title Here</p>
+    <h2 class="section-h reveal">Lorem ipsum dolor<br><em>sit amet.</em></h2>
+    <p class="body-text reveal">
+      Fusce a est pulvinar, volutpat ex feugiat, imperdiet nulla. Mauris eu rhoncus sapien. Praesent ac tellus vel mauris porttitor maximus. Fusce at ipsum sed dui commodo viverra ac fringilla ipsum. Praesent in ipsum ornare, maximus dolor nec, ultrices metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin finibus arcu et magna dignissim fringilla. Mauris vitae placerat est. Vestibulum eu mauris mollis, mattis est vel, scelerisque erat.
+    </p>
+    <p class="body-text reveal">
+      Morbi nisl lacus, condimentum quis tellus quis, luctus lacinia nibh. Phasellus sit amet quam eget leo rutrum ultrices. Nullam sagittis dapibus dolor, a posuere lectus porta nec. Nam sit amet maximus risus. Pellentesque sollicitudin nunc metus, sed porttitor erat elementum et. Mauris non enim commodo, mollis dui eu, suscipit tellus. Maecenas risus enim, mattis at luctus vestibulum, fringilla et magna. Sed nunc turpis, posuere bibendum mauris eget, facilisis eleifend est. Nullam sed lacus eu augue maximus scelerisque. Vestibulum eget odio fringilla, finibus libero vel, imperdiet lacus. In rutrum egestas metus. Etiam mattis risus commodo risus mollis congue.
+    </p>
   </div>
 </section>
 
