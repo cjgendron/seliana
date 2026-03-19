@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Icelandic Mares — Seliana</title>
+<link href="https://fonts.googleapis.com/css2?family=Ruthie&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #2C5F7A; --slate: #3D5166; --chestnut: #8B5E3C;
+  --gold: #C9A84C; --mist: #A3C4D4; --neutral: #F5F8FA;
+  --white: #ffffff; --ink: #1E2A32; --ink-light: #6B7C87;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--neutral); } ::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 3px; }
+
+/* ─── NAV (solid on interior pages) ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 60px;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.07); transition: padding 0.3s;
+}
+
+/* ─── LOGO ─── */
+.nav-logo { text-decoration: none; display: inline-flex; flex-direction: column; align-items: stretch; gap: 4px; user-select: none; }
+.nav-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.nav-logo-s { font-family: 'Ruthie', cursive; font-size: 42px; line-height: 0.85; color: var(--gold); }
+.nav-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: var(--ink); font-size: 19px; }
+.nav-logo-rest span { display: inline-block; }
+.nav-logo-rest .ke { letter-spacing: 0.04em; } .nav-logo-rest .kl { letter-spacing: 0.05em; }
+.nav-logo-rest .ki { letter-spacing: 0.05em; } .nav-logo-rest .ka1 { letter-spacing: 0.04em; }
+.nav-logo-rest .kn { letter-spacing: 0.02em; } .nav-logo-rest .ka2 { letter-spacing: 0; }
+.nav-logo-orn { display: flex; align-items: center; }
+.nav-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.75; }
+.nav-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+
+/* ─── NAV LINKS ─── */
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 11px; font-weight: 400; letter-spacing: 3px;
+  text-transform: uppercase; text-decoration: none;
+  color: var(--ink-light); transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a.active { color: var(--gold); }
+.nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 6px; transition: opacity 0.2s !important; }
+.nav-cta:hover { opacity: 0.85 !important; }
+
+/* ─── DROPDOWN ─── */
+.nav-dropdown { position: relative; display: flex; align-items: center; }
+.nav-dropdown-trigger {
+  font-size: 11px; font-weight: 400; letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink-light); transition: color 0.3s;
+  cursor: pointer; display: flex; align-items: center; gap: 7px;
+  background: none; border: none; font-family: 'Outfit', sans-serif;
+  padding: 0; user-select: none;
+}
+.nav-dropdown-trigger:hover { color: var(--gold); }
+.nav-dropdown-trigger.open { color: var(--gold); }
+
+.nav-chevron {
+  width: 8px; height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.25s;
+  display: inline-block; flex-shrink: 0;
+}
+.nav-dropdown-trigger.open .nav-chevron { transform: rotate(-135deg) translateY(-2px); }
+
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 18px); left: 50%;
+  background: rgba(255,255,255,0.98); backdrop-filter: blur(14px);
+  border: 1px solid rgba(201,168,76,0.2); border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(30,42,50,0.12), 0 2px 8px rgba(30,42,50,0.06);
+  padding: 10px 0; min-width: 190px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateX(-50%) translateY(-6px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+}
+.nav-dropdown-menu::before {
+  content: ''; position: absolute;
+  top: -5px; left: 50%; transform: translateX(-50%) rotate(45deg);
+  width: 9px; height: 9px; background: rgba(255,255,255,0.98);
+  border-left: 1px solid rgba(201,168,76,0.2); border-top: 1px solid rgba(201,168,76,0.2);
+}
+.nav-dropdown.active .nav-dropdown-menu {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown-menu a {
+  display: block; padding: 10px 24px; font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--ink-light) !important;
+  text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap;
+}
+.nav-dropdown-menu a:hover { color: var(--gold) !important; background: rgba(201,168,76,0.05); }
+.nav-dropdown-menu a + a { border-top: 1px solid rgba(163,196,212,0.2); }
+/* Active state for current page within dropdown */
+.nav-dropdown-menu a.active { color: var(--gold) !important; }
+
+/* ─── HAMBURGER ─── */
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; z-index: 210; }
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px; background: var(--ink);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ─── MOBILE DRAWER ─── */
+.nav-mobile-drawer {
+  display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 199;
+  background: rgba(255,255,255,0.98); backdrop-filter: blur(18px);
+  box-shadow: 0 4px 24px rgba(30,42,50,0.10); padding-bottom: 28px;
+  transform: translateY(-100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-mobile-drawer.open { transform: translateY(0); }
+.nav-mobile-drawer-inner { padding: 0 28px; display: flex; flex-direction: column; }
+.nav-mobile-spacer { height: 72px; border-bottom: 1px solid rgba(163,196,212,0.25); margin-bottom: 8px; }
+.nav-mobile-drawer a,
+.nav-mobile-herd-trigger {
+  font-size: 11px; font-weight: 400; letter-spacing: 3px;
+  text-transform: uppercase; text-decoration: none;
+  color: var(--ink-light); padding: 14px 0;
+  border: none; border-bottom: 1px solid rgba(163,196,212,0.2);
+  transition: color 0.2s; display: flex; align-items: center; justify-content: space-between;
+  background: none; outline: none; font-family: 'Outfit', sans-serif;
+  cursor: pointer; width: 100%;
+}
+.nav-mobile-drawer a:last-child { border-bottom: none; }
+.nav-mobile-drawer a:hover, .nav-mobile-herd-trigger:hover { color: var(--gold); }
+.nav-mobile-herd-sub {
+  overflow: hidden; max-height: 0;
+  transition: max-height 0.3s ease; display: flex; flex-direction: column;
+}
+.nav-mobile-herd-sub.open { max-height: 200px; }
+.nav-mobile-herd-sub a {
+  padding: 11px 0 11px 18px; font-size: 10px; letter-spacing: 2.5px;
+  color: var(--ink-light); border-bottom: 1px solid rgba(163,196,212,0.15);
+}
+.nav-mobile-herd-sub a.active { color: var(--gold); }
+.nav-mobile-herd-sub a:last-child { border-bottom: none; }
+.nav-mobile-drawer .nav-mobile-cta {
+  margin-top: 20px; background: var(--gold) !important; color: var(--white) !important;
+  padding: 13px 0; border-radius: 6px; text-align: center;
+  justify-content: center; letter-spacing: 3px; border-bottom: none !important;
+}
+.nav-mobile-drawer .nav-mobile-cta:hover { opacity: 0.88; color: var(--white) !important; }
+.nav-mobile-chevron {
+  width: 8px; height: 8px;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px); transition: transform 0.25s;
+  display: inline-block; flex-shrink: 0;
+}
+.nav-mobile-herd-trigger.open .nav-mobile-chevron { transform: rotate(-135deg) translateY(-2px); }
+
+/* ─── PAGE HERO ─── */
+.page-hero { background: var(--ink); padding: 140px 60px 80px; position: relative; overflow: hidden; }
+.page-hero-bg { position: absolute; inset: -10%; background-image: url('https://images.unsplash.com/photo-1449927863916-6dab08b8bde3?w=1800&q=80'); background-size: cover; background-position: center 30%; opacity: 0.22; }
+.page-hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
+.page-hero-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; font-weight: 400; }
+.page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 76px); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 20px; }
+.page-hero h1 em { font-style: italic; color: var(--gold); }
+.page-hero-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 520px; line-height: 1.8; }
+
+/* ─── MARE LISTINGS ─── */
+.mares-section { background: var(--white); padding: 96px 72px 112px; }
+.mares-inner { max-width: 1120px; margin: 0 auto; }
+.mares-header { margin-bottom: 68px; }
+.section-tag { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 12px; }
+.section-h { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 3.5vw, 48px); font-weight: 300; line-height: 1.1; color: var(--ink); }
+.section-h em { font-style: italic; color: var(--primary); }
+
+/* Mare block */
+.mare-block {
+  display: grid; grid-template-columns: 400px 1fr;
+  margin-bottom: 64px; border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 4px; overflow: hidden; background: var(--white);
+  box-shadow: 0 2px 24px rgba(30,42,50,0.055);
+  opacity: 0; transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.mare-block.visible { opacity: 1; transform: translateY(0); }
+.mare-block:last-child { margin-bottom: 0; }
+.mare-block.flip { grid-template-columns: 1fr 400px; }
+.mare-block.flip .mare-photo { order: 2; }
+.mare-block.flip .mare-info { order: 1; }
+
+.mare-photo { position: relative; overflow: hidden; min-height: 460px; background: var(--neutral); }
+.mare-photo-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.7s ease; }
+.mare-block:hover .mare-photo-img { transform: scale(1.03); }
+.mare-photo-placeholder {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  background: linear-gradient(150deg, #edf2f5, #e2eaef);
+}
+.mare-photo-placeholder svg { opacity: 0.15; }
+.mare-photo-placeholder span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); opacity: 0.45; font-weight: 400; }
+
+.mare-info { padding: 52px 52px 48px; display: flex; flex-direction: column; justify-content: center; background: var(--white); }
+.mare-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 3vw, 46px); font-weight: 300; line-height: 1; color: var(--ink); margin-bottom: 6px; }
+.mare-name em { font-style: italic; color: var(--gold); }
+.mare-subtitle { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 28px; }
+.mare-rule { width: 32px; height: 1.5px; background: var(--gold); margin-bottom: 28px; }
+
+.mare-vitals { display: flex; gap: 36px; flex-wrap: wrap; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.vital-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 4px; }
+.vital-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--ink); }
+
+.mare-info:not(.has-scores) .scores-block { display: none; }
+.scores-block { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.scores-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 12px; }
+.scores-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.score-pill { display: flex; flex-direction: column; align-items: center; background: var(--neutral); border: 1px solid rgba(0,0,0,0.05); border-radius: 3px; padding: 8px 10px; min-width: 52px; }
+.score-trait { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 4px; }
+.score-val { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--primary); line-height: 1; }
+.score-val.gold { color: var(--gold); }
+
+.pedigree-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 12px; }
+.ped-tree { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, auto); gap: 0; }
+.ped-sire { grid-column: 1; grid-row: 1 / 3; display: flex; align-items: center; border: 1px solid rgba(0,0,0,0.07); border-right: none; border-bottom: 1px solid rgba(0,0,0,0.07); padding: 12px 14px; position: relative; }
+.ped-dam { grid-column: 1; grid-row: 3 / 5; display: flex; align-items: center; border: 1px solid rgba(0,0,0,0.07); border-right: none; border-top: none; padding: 12px 14px; }
+.ped-ss { grid-column: 2; grid-row: 1; border: 1px solid rgba(0,0,0,0.07); border-bottom: none; padding: 10px 14px; }
+.ped-sd { grid-column: 2; grid-row: 2; border: 1px solid rgba(0,0,0,0.07); border-bottom: 1px solid rgba(0,0,0,0.07); padding: 10px 14px; }
+.ped-ds { grid-column: 2; grid-row: 3; border: 1px solid rgba(0,0,0,0.07); border-top: none; border-bottom: none; padding: 10px 14px; }
+.ped-dd { grid-column: 2; grid-row: 4; border: 1px solid rgba(0,0,0,0.07); border-top: 1px solid rgba(0,0,0,0.07); padding: 10px 14px; }
+.ped-sire::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 1px; background: rgba(0,0,0,0.07); }
+.ped-role { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 3px; }
+.ped-name { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.ped-name.placeholder { color: rgba(163,196,212,0.5); }
+
+.mare-desc { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--ink-light); margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.mare-photo-credit { margin-top: 16px; font-size: 11px; font-weight: 300; color: var(--ink-light); line-height: 1.6; font-style: italic; }
+.mare-photo-credit:empty { display: none; }
+
+/* ─── CLOSING BANNER ─── */
+.closing-banner { background: var(--neutral); border-top: 1px solid rgba(0,0,0,0.06); padding: 72px; display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap; }
+.closing-banner-text p.tag { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 10px; }
+.closing-banner-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--ink); line-height: 1.2; }
+.closing-banner-text h3 em { font-style: italic; color: var(--primary); }
+.closing-banner-text p.body { font-size: 14px; font-weight: 300; line-height: 1.85; color: var(--ink-light); margin-top: 10px; max-width: 480px; }
+.btn-primary { display: inline-block; background: var(--primary); color: var(--white); padding: 13px 30px; border-radius: 6px; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; transition: background 0.2s, transform 0.2s; flex-shrink: 0; }
+.btn-primary:hover { background: var(--slate); transform: translateY(-1px); }
+
+/* ─── FOOTER ─── */
+footer { background: var(--ink); padding: 64px 60px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
+.footer-logo { display: inline-flex; flex-direction: column; align-items: stretch; gap: 5px; user-select: none; margin-bottom: 14px; }
+.footer-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.footer-logo-s { font-family: 'Ruthie', cursive; font-size: 52px; line-height: 0.85; color: var(--gold); }
+.footer-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: rgba(255,255,255,0.9); font-size: 24px; }
+.footer-logo-rest span { display: inline-block; }
+.footer-logo-rest .ke { letter-spacing: 0.04em; } .footer-logo-rest .kl { letter-spacing: 0.05em; }
+.footer-logo-rest .ki { letter-spacing: 0.05em; } .footer-logo-rest .ka1 { letter-spacing: 0.04em; }
+.footer-logo-rest .kn { letter-spacing: 0.02em; } .footer-logo-rest .ka2 { letter-spacing: 0; }
+.footer-logo-orn { display: flex; align-items: center; }
+.footer-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.7; }
+.footer-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.footer-tagline { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.35); max-width: 210px; }
+.footer-col h5 { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 18px; font-weight: 500; }
+.footer-col a { display: block; color: rgba(255,255,255,0.46); text-decoration: none; font-size: 13px; font-weight: 300; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 300; }
+.footer-rule { width: 28px; height: 2px; background: var(--gold); border-radius: 1px; }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1020px) {
+  .mare-block, .mare-block.flip { grid-template-columns: 1fr; }
+  .mare-block.flip .mare-photo, .mare-block.flip .mare-info { order: unset; }
+  .mare-photo { min-height: 320px; }
+  .mare-info { padding: 40px 36px; }
+}
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile-drawer { display: block; }
+  .page-hero { padding: 110px 24px 60px; }
+  .mares-section { padding: 64px 24px 80px; }
+  .closing-banner { padding: 52px 28px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .mare-info { padding: 32px 20px; }
+  .mare-vitals { gap: 20px; }
+  .footer-top { grid-template-columns: 1fr; }
+  footer { padding: 52px 24px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-name"><span class="nav-logo-s">S</span><span class="nav-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+    <div class="nav-logo-orn"><div class="nav-logo-orn-seg"></div><div class="nav-logo-orn-diamond"></div><div class="nav-logo-orn-seg"></div></div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-dropdown" id="herdDropdown">
+      <button class="nav-dropdown-trigger open" id="herdTrigger" aria-haspopup="true" aria-expanded="false">
+        Our Herd
+        <span class="nav-chevron"></span>
+      </button>
+      <div class="nav-dropdown-menu" role="menu">
+        <a href="mares.html" class="active" role="menuitem">Mares</a>
+        <a href="stallions.html" role="menuitem">Stallions</a>
+        <a href="bred-by-seliana.html" role="menuitem">Bred by Seliana</a>
+      </div>
+    </div>
+    <a href="for-sale.html">Horses For Sale</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html" class="nav-cta">Inquire</a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-mobile-drawer" id="mobileDrawer">
+  <div class="nav-mobile-drawer-inner">
+    <div class="nav-mobile-spacer"></div>
+    <button class="nav-mobile-herd-trigger" id="mobileHerdTrigger">
+      Our Herd
+      <span class="nav-mobile-chevron"></span>
+    </button>
+    <div class="nav-mobile-herd-sub" id="mobileHerdSub">
+      <a href="mares.html" class="active">Mares</a>
+      <a href="stallions.html">Stallions</a>
+      <a href="bred-by-seliana.html">Bred by Seliana</a>
+    </div>
+    <a href="for-sale.html">Horses For Sale</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html" class="nav-mobile-cta">Inquire</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <!-- <div class="page-hero-bg"></div> -->
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Meet Our Herd</p>
+    <h1>Icelandic Mares<br><em>at Seliana</em></h1>
+    <p class="page-hero-sub">Every horse has a mother — and at Seliana, we believe the mare is the most important part of the breeding equation. Our mares are selected for naturally clear gaits, strong conformation, and easy, pleasant temperaments. We select the best mares to bring your next partner — and your dreams — to life.</p>
+  </div>
+</div>
+
+<!-- MARE LISTINGS -->
+<section class="mares-section">
+  <div class="mares-inner">
+
+    <div style="display: none;" class="mares-header">
+      <p class="section-tag">The Broodmare Band</p>
+      <h2 class="section-h">Our <em>foundation mares.</em></h2>
+    </div>
+
+    <div class="mare-block" id="mare-1">
+      <div class="mare-photo">
+        <div class="mare-photo-img" style="background-image:url('tru.jpg'); background-position: center;"></div>
+      </div>
+      <div class="mare-info">
+        <h2 class="mare-name">Trú <em>frá Vatnsleysu</em></h2>
+        <p class="mare-subtitle">IS2008258515 &nbsp;·&nbsp; Black w/ Splashed White</p>
+        <div class="mare-rule"></div>
+        <div class="mare-vitals">
+          <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
+          <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+          <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">101</p></div>
+          <div class="vital"><p class="vital-label">FIZO Score</p><p class="vital-value">7.94 🥈</p></div>
+        </div>
+        <div class="pedigree-block">
+          <p class="pedigree-label">Pedigree</p>
+          <div class="ped-tree">
+            <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Glampi frá Vatnsleysu (8.35)</p></div></div>
+            <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name">Smári frá Borgarhóli (8.01)</p></div>
+            <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name">Albína frá Vatnsleysu (7.84)</p></div>
+            <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Tign frá Langholti II (7.74)</p></div></div>
+            <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name">Hrafn frá Holtsmúla (8.56)</p></div>
+            <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name">Móna frá Miðsitju (7.77)</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mare-block flip" id="mare-2">
+      <div class="mare-photo">
+        <div class="mare-photo-img" style="background-image:url('rak.jpg'); background-position: center;"></div>
+      </div>
+      <div class="mare-info">
+        <h2 class="mare-name">Rák <em>frá Syðra-Langholti</em></h2>
+        <p class="mare-subtitle">IS2013288322 &nbsp;·&nbsp; Chestnut</p>
+        <div class="mare-rule"></div>
+        <div class="mare-vitals">
+          <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
+          <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+          <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">94</p></div>
+        </div>
+        <div class="pedigree-block">
+          <p class="pedigree-label">Pedigree</p>
+          <div class="ped-tree">
+            <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Haukur frá Haukholtum (8.02)</p></div></div>
+            <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name">Krákur frá Blesastöðum 1A (8.34)</p></div>
+            <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name">Elding frá Haukholtum (8.56)</p></div>
+            <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Glóð frá Miðfelli 5 (7.93)</p></div></div>
+            <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name">Gustur frá Grund (8.28)</p></div>
+            <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name">Kvika frá Miðfelli 5</p></div>
+          </div>
+        </div>
+        <p class="mare-photo-credit">Photo Credit: Mouse Hendricks, 2024</p>
+      </div>
+    </div>
+
+    <div class="mare-block" id="mare-7">
+      <div class="mare-photo">
+        <div class="mare-photo-img" style="background-image:url('una.jpg'); background-position: center;"></div>
+      </div>
+      <div class="mare-info">
+        <h2 class="mare-name">Una <em>frá Holtsmúla 1</em></h2>
+        <p class="mare-subtitle">IS2016281115 &nbsp;·&nbsp; Black</p>
+        <div class="mare-rule"></div>
+        <div class="mare-vitals">
+          <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
+          <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+          <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">103</p></div>
+        </div>
+        <div class="pedigree-block">
+          <p class="pedigree-label">Pedigree</p>
+          <div class="ped-tree">
+            <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Vökull frá Efri-Brú (8.37)</p></div></div>
+            <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name">Arður frá Brautarholti (8.49)</p></div>
+            <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name">Kjalvör frá Efri-Brú (7.9)</p></div>
+            <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Ugla frá Kommu (8.07)</p></div></div>
+            <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name">Höldur frá Brún (8.06)</p></div>
+            <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name">Salka frá Klauf (7.98)</p></div>
+          </div>
+        </div>
+        <p class="mare-photo-credit"></p>
+      </div>
+    </div>
+
+    <div class="mare-block flip" id="mare-3">
+      <div class="mare-photo">
+        <div class="mare-photo-placeholder">
+          <svg width="64" height="64" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
+            <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Photo coming soon</span>
+        </div>
+      </div>
+      <div class="mare-info">
+        <h2 class="mare-name">Hera <em>frá Seltjarnarnesi</em></h2>
+        <p class="mare-subtitle">IS2019225595 &nbsp;·&nbsp; Blue Dun</p>
+        <div class="mare-rule"></div>
+        <div class="mare-vitals">
+          <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
+          <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+          <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">109</p></div>
+        </div>
+        <div class="pedigree-block">
+          <p class="pedigree-label">Pedigree</p>
+          <div class="ped-tree">
+            <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Álfaskeggur frá Kjarnholtum I (8.40)</p></div></div>
+            <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name">Álfarinn frá Syðri-Gegnishólum (8.65)</p></div>
+            <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name">Hera frá Kjarnholtum I (7.75)</p></div>
+            <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Vaka frá Skeiðvöllum (7.88)</p></div></div>
+            <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name">Álffinnur frá Syðri-Gegnishólum (8.37)</p></div>
+            <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name">Vaka frá Arnarhóli (8.33)</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mare-block" id="mare-6">
+      <div class="mare-photo">
+        <div class="mare-photo-placeholder">
+          <svg width="64" height="64" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
+            <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Photo coming soon</span>
+        </div>
+      </div>
+      <div class="mare-info">
+        <h2 class="mare-name">Örk <em>frá Holtsmúla 1</em></h2>
+        <p class="mare-subtitle">IS2020281116 &nbsp;·&nbsp; Grey (born black)</p>
+        <div class="mare-rule"></div>
+        <div class="mare-vitals">
+          <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
+          <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+          <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">120</p></div>
+          <div class="vital"><p class="vital-label">FIZO Score</p><p class="vital-value">7.86 🥈 (conformation)</p></div>
+        </div>
+        <div class="pedigree-block">
+          <p class="pedigree-label">Pedigree</p>
+          <div class="ped-tree">
+            <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Þráinn frá Flagbjarnarholti (8.95)</p></div></div>
+            <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name">Álfur frá Selfossi (8.46)</p></div>
+            <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name">Þyrla frá Ragnheiðarstöðum (8.24)</p></div>
+            <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Karítas frá Holtsmúla 1</p></div></div>
+            <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name">Konsert frá Hofi (8.72)</p></div>
+            <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name">Kolfinna frá Gröf (8.11)</p></div>
+          </div>
+        </div>
+        <p class="mare-photo-credit"></p>
+      </div>
+    </div>
+
+    <div class="mare-block flip" id="mare-8">
+      <div class="mare-photo">
+        <div class="mare-photo-placeholder">
+          <svg width="64" height="64" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
+            <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Photo coming soon</span>
+        </div>
+      </div>
+      <div class="mare-info">
+        <h2 class="mare-name">Dúsa <em>frá Miðsitju</em></h2>
+        <p class="mare-subtitle">IS2021258840 &nbsp;·&nbsp; Black w/ Splashed White</p>
+        <div class="mare-rule"></div>
+        <div class="mare-vitals">
+          <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
+          <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+          <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">114</p></div>
+        </div>
+        <div class="pedigree-block">
+          <p class="pedigree-label">Pedigree</p>
+          <div class="ped-tree">
+            <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Atli frá Efri-Fitjum (8.61)</p></div></div>
+            <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name">Viti frá Kagaðarhóli (8.26)</p></div>
+            <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name">Hrina frá Blönduósi (7.62)</p></div>
+            <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Dama frá Breiðholti, Gbr.</p></div></div>
+            <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name">Kvistur frá Skagaströnd (8.58)</p></div>
+            <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name">Hrund frá Torfunesi (8.02)</p></div>
+          </div>
+        </div>
+        <p class="mare-photo-credit"></p>
+      </div>
+    </div>
+
+    <div class="mare-block" id="mare-4">
+      <div class="mare-photo">
+        <div class="mare-photo-placeholder">
+          <svg width="64" height="64" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
+            <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Photo coming soon</span>
+        </div>
+      </div>
+      <div class="mare-info">
+        <h2 class="mare-name">Táta <em>from Sand Meadow</em></h2>
+        <p class="mare-subtitle">US2020205617 &nbsp;·&nbsp; Red Dun w/ Splashed White</p>
+        <div class="mare-rule"></div>
+        <div class="mare-vitals">
+          <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">USA</p></div>
+          <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+          <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">100</p></div>
+        </div>
+        <div class="pedigree-block">
+          <p class="pedigree-label">Pedigree</p>
+          <div class="ped-tree">
+            <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Strákur frá Vatnsleysu</p></div></div>
+            <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name">Glampi frá Vatnsleysu (8.35)</p></div>
+            <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name">Sonata frá Vatnsleysu (8.1)</p></div>
+            <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Herborg frá Oddhóli</p></div></div>
+            <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name">Grunur frá Oddhóli (8.23)</p></div>
+            <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name">Hekla frá Oddhóli (7.96)</p></div>
+          </div>
+        </div>
+        <p class="mare-photo-credit"></p>
+      </div>
+    </div>
+
+    <div class="mare-block flip" id="mare-5">
+      <div class="mare-photo">
+        <div class="mare-photo-placeholder">
+          <svg width="64" height="64" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
+            <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Photo coming soon</span>
+        </div>
+      </div>
+      <div class="mare-info">
+        <h2 class="mare-name">Humla <em>from Seliana</em></h2>
+        <p class="mare-subtitle">US2023205989 &nbsp;·&nbsp; Chestnut</p>
+        <div class="mare-rule"></div>
+        <div class="mare-vitals">
+          <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">USA (imported in utero)</p></div>
+          <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+          <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">114</p></div>
+        </div>
+        <div class="pedigree-block">
+          <p class="pedigree-label">Pedigree</p>
+          <div class="ped-tree">
+            <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Rauðskeggur frá Kjarnholtum I (8.87)</p></div></div>
+            <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name">Kiljan frá Steinnesi (8.78)</p></div>
+            <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name">Hera frá Kjarnholtum I (7.75)</p></div>
+            <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Hera frá Seltjarnarnesi</p></div></div>
+            <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name">Álfaskeggur frá Kjarnholtum I (8.40)</p></div>
+            <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name">Vaka frá Skeiðvöllum (7.88)</p></div>
+          </div>
+        </div>
+        <p class="mare-photo-credit"></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLOSING BANNER -->
+<div class="closing-banner">
+  <div class="closing-banner-text">
+    <p class="tag">Breeding Inquiries</p>
+    <h3>Interested in a foal from<br><em>our program?</em></h3>
+    <p class="body">We accept a limited number of breeding inquiries each season. Tell us about your program and what you're looking for.</p>
+  </div>
+  <a href="contact.html" class="btn-primary">Get in Touch</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-name"><span class="footer-logo-s">S</span><span class="footer-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+          <div class="footer-logo-orn"><div class="footer-logo-orn-seg"></div><div class="footer-logo-orn-diamond"></div><div class="footer-logo-orn-seg"></div></div>
+        </div>
+        <p class="footer-tagline">Icelandic horse breeders and importers placing exceptional horses across the US.</p>
+      </div>
+      <div class="footer-col"><h5>Horses</h5><a href="horses.html">Available Now</a><a href="horses.html">Foals</a><a href="contact.html">Custom Imports</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="index.html">Home</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h5>Follow</h5><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 Seliana. All rights reserved.</p><div class="footer-rule"></div></div>
+  </div>
+</footer>
+
+<script>
+const herdDropdown = document.getElementById('herdDropdown');
+const herdTrigger = document.getElementById('herdTrigger');
+const hamburger = document.getElementById('hamburger');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const mobileHerdTrigger = document.getElementById('mobileHerdTrigger');
+const mobileHerdSub = document.getElementById('mobileHerdSub');
+
+// Desktop dropdown
+herdTrigger.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = herdDropdown.classList.toggle('active');
+  herdTrigger.classList.toggle('open', isOpen);
+  herdTrigger.setAttribute('aria-expanded', isOpen);
+});
+document.addEventListener('click', () => {
+  herdDropdown.classList.remove('active');
+  herdTrigger.classList.remove('open');
+  herdTrigger.setAttribute('aria-expanded', false);
+});
+herdDropdown.querySelector('.nav-dropdown-menu').addEventListener('click', e => e.stopPropagation());
+
+// Mobile drawer
+function toggleMenu() {
+  const isOpen = mobileDrawer.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+mobileHerdTrigger.addEventListener('click', () => {
+  const isOpen = mobileHerdSub.classList.toggle('open');
+  mobileHerdTrigger.classList.toggle('open', isOpen);
+});
+mobileDrawer.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+// Mare block reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 100);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.mare-block').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
