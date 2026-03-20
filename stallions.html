@@ -241,18 +241,65 @@ nav {
 .vital-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 4px; }
 .vital-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--ink); }
 
-/* FEIF Scores */
-.scores-block { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(0,0,0,0.06); }
-.scores-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 12px; }
-.scores-row { display: flex; gap: 6px; flex-wrap: wrap; }
-.score-pill {
-  display: flex; flex-direction: column; align-items: center;
-  background: var(--neutral); border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 3px; padding: 8px 10px; min-width: 56px;
+/* FIZO Scores */
+.fizo-block { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.fizo-section-label {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ink-light); font-weight: 400; margin-bottom: 14px;
 }
-.score-trait { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 4px; }
-.score-val { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--primary); line-height: 1; }
+.fizo-subsection { margin-bottom: 20px; }
+.fizo-subsection:last-child { margin-bottom: 0; }
+.fizo-subsection-title {
+  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--primary); font-weight: 500; margin-bottom: 10px;
+  padding-bottom: 6px; border-bottom: 1px solid rgba(44,95,122,0.1);
+}
+.score-row { display: flex; gap: 0; }
+.score-list { flex: 1; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.07); border-radius: 3px; overflow: hidden; }
+.score-list + .score-list { margin-left: -1px; }
+.score-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px; background: var(--white);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.score-item:last-child { border-bottom: none; }
+.score-item.total-item {
+  background: rgba(44,95,122,0.04); border-top: 1px solid rgba(44,95,122,0.12);
+}
+.score-trait { font-size: 11px; font-weight: 300; color: var(--ink-light); letter-spacing: 0.2px; }
+.score-item.total-item .score-trait { font-weight: 500; color: var(--ink); }
+.score-val { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--primary); line-height: 1; }
 .score-val.gold { color: var(--gold); }
+
+.fizo-grand-total {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; margin-top: 12px;
+  background: var(--ink); border-radius: 3px;
+}
+.fizo-grand-total-label {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); font-weight: 400;
+}
+.fizo-grand-total-score {
+  font-family: 'Cormorant Garamond', serif; font-size: 28px;
+  font-weight: 600; color: var(--gold); line-height: 1;
+}
+
+/* Color Genetics */
+.genetics-block { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.genetics-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 14px; }
+.genetics-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.gene-tag {
+  display: inline-block;
+  background: var(--neutral); border: 1px solid rgba(44,95,122,0.15);
+  border-radius: 3px; padding: 7px 14px;
+  font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600;
+  color: var(--primary); letter-spacing: 0.5px;
+}
+.gene-tag.highlighted {
+  background: rgba(44,95,122,0.07); border-color: rgba(44,95,122,0.3);
+}
+.genetics-note { font-size: 12px; font-weight: 300; color: var(--ink-light); line-height: 1.7; font-style: italic; }
 
 /* Pedigree — same grid as mares */
 .pedigree-block {}
@@ -421,7 +468,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
   <div class="page-hero-content">
     <p class="page-hero-eyebrow">Meet Our Herd</p>
     <h1>Icelandic Stallions<br><em>at Seliana</em></h1>
-    <p class="page-hero-sub">Power. Presence. Quality. There is nothing quite as moving as the spirit of a stallion. Every stallion at Seliana is chosen for both his individual character, and his exceptional genetics. From Iceland to America — bringing you the best breeding stock to create the foals of your dreams.</p>
+    <p class="page-hero-sub">Our stallions are selected with the same intentionality as every horse in our program — chosen for clear, separated gaits, willing temperaments, and the conformation to pass those qualities on. Each is a proven or promising partner in building the next generation of Seliana horses.</p>
   </div>
 </div>
 
@@ -434,11 +481,117 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
       <!-- Full-width photo -->
       <div class="stallion-photo">
+        <div class="stallion-photo-img" style="background-image:url('stallions-svalur.jpeg');"></div>
+
+        <!-- Availability badge -->
+        <div class="availability-badge">
+          <div class="availability-dot available"></div>
+          <span class="availability-label">Available for Breeding</span>
+        </div>
+      </div>
+
+      <!-- Body: main info + sidebar -->
+      <div class="stallion-body">
+
+        <!-- Main left column -->
+        <div class="stallion-main">
+          <h2 class="stallion-name">Svalur <em>frá Innri-Skeljabrekku</em></h2>
+          <p class="stallion-subtitle">IS2015135615 &nbsp;·&nbsp; Chestnut, carries silver dapple</p>
+          <div class="stallion-rule"></div>
+
+          <!-- Vitals -->
+          <div class="stallion-vitals">
+            <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
+            <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+            <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">106</p></div>
+            <div class="vital"><p class="vital-label">Height</p><p class="vital-value">14.0 hh</p></div>
+          </div>
+
+          <!-- Color Genetics (optional — remove if not applicable) -->
+          <div class="genetics-block">
+            <p class="genetics-label">Color Genetics</p>
+            <div class="genetics-tags">
+              <!-- Add one gene-tag per locus. Use class="gene-tag highlighted" for notable genes. -->
+              <span class="gene-tag">ee</span>
+              <span class="gene-tag">aa</span>
+              <span class="gene-tag highlighted">Zz</span>
+            </div>
+            <p class="genetics-note">Carries one copy of the silver dapple gene! This gene only expresses itself on a black based coat, but can be carried by chestnut horses.</p>
+          </div>
+
+          <!-- Pedigree -->
+          <div class="pedigree-block">
+            <p class="pedigree-label">Pedigree</p>
+            <div class="ped-tree">
+              <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name">Sire Name (0.00)</p></div></div>
+              <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name placeholder">—</p></div>
+              <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name placeholder">—</p></div>
+              <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name">Dam Name (0.00)</p></div></div>
+              <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name placeholder">—</p></div>
+              <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name placeholder">—</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breeding sidebar -->
+        <div class="stallion-sidebar">
+          <div class="breeding-panel">
+            <p class="breeding-panel-title">Breeding Information</p>
+
+            <div class="breeding-row">
+              <p class="breeding-row-label">Standing At</p>
+              <p class="breeding-row-value">Seliana Stables<br>New York, USA</p>
+            </div>
+            <div class="breeding-divider"></div>
+
+            <div class="breeding-row">
+              <p class="breeding-row-label">Stud Fee</p>
+              <p class="breeding-row-value accent">$1,000</p>
+            </div>
+            <div class="breeding-divider"></div>
+
+            <div class="breeding-row breeding-services">
+              <p class="breeding-row-label">Services Available</p>
+              <div style="margin-top: 10px; display: flex; flex-wrap: wrap;">
+                <span class="service-tag">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#2C5F7A" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8 4.5" stroke="#2C5F7A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Live Cover
+                </span>
+                <span class="service-tag">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#2C5F7A" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8 4.5" stroke="#2C5F7A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Fresh Cooled
+                </span>
+                <span class="service-tag">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#2C5F7A" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8 4.5" stroke="#2C5F7A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Frozen
+                </span>
+
+                <!-- All shipped semen services are handled through Cornell University. -->
+              </div>
+            </div>
+
+            <a href="contact.html" class="breeding-cta">Breeding Inquiry</a>
+          </div>
+        </div>
+
+      </div><!-- /.stallion-body -->
+    </div><!-- /.stallion-block -->
+
+    <!-- ── STALLION 2 PLACEHOLDER ── -->
+    <div class="stallion-block" id="stallion-1">
+
+      <!-- Full-width photo -->
+      <div class="stallion-photo">
         <!-- To add a photo: replace the placeholder div below with:
              <div class="stallion-photo-img" style="background-image:url('your-photo.jpg');"></div>
         -->
         <div class="stallion-photo-placeholder">
-          <span>Photo coming soon!</span>
+          <svg width="80" height="80" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
+            <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Photo coming soon</span>
         </div>
         <!-- Availability badge -->
         <div class="availability-badge">
@@ -464,17 +617,68 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
             <div class="vital"><p class="vital-label">Height</p><p class="vital-value">—</p></div>
           </div>
 
-          <!-- FEIF Scores -->
-          <div class="scores-block">
-            <p class="scores-label">FEIF Competition Scores</p>
-            <div class="scores-row">
-              <div class="score-pill"><span class="score-trait">Total</span><span class="score-val gold">—</span></div>
-              <div class="score-pill"><span class="score-trait">Tölt</span><span class="score-val">—</span></div>
-              <div class="score-pill"><span class="score-trait">Trot</span><span class="score-val">—</span></div>
-              <div class="score-pill"><span class="score-trait">Pace</span><span class="score-val">—</span></div>
-              <div class="score-pill"><span class="score-trait">Canter</span><span class="score-val">—</span></div>
-              <div class="score-pill"><span class="score-trait">Spirit</span><span class="score-val">—</span></div>
+          <!-- FIZO Scores (optional — remove this block if no scores available) -->
+          <div class="fizo-block">
+            <p class="fizo-section-label">FIZO Scores</p>
+
+            <div class="fizo-subsection">
+              <p class="fizo-subsection-title">Conformation</p>
+              <div class="score-row">
+                <div class="score-list">
+                  <div class="score-item"><span class="score-trait">Head</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Neck · Withers · Shoulders</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Back &amp; Croup</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Proportions</span><span class="score-val">—</span></div>
+                  <div class="score-item total-item"><span class="score-trait">Total</span><span class="score-val gold">—</span></div>
+                </div>
+                <div class="score-list">
+                  <div class="score-item"><span class="score-trait">Legs</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Joints</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Hooves</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Mane &amp; Tail</span><span class="score-val">—</span></div>
+                  <div class="score-item" style="visibility:hidden;"><span class="score-trait">&nbsp;</span><span class="score-val">&nbsp;</span></div>
+                </div>
+              </div>
             </div>
+
+            <div class="fizo-subsection">
+              <p class="fizo-subsection-title">Rideability</p>
+              <div class="score-row">
+                <div class="score-list">
+                  <div class="score-item"><span class="score-trait">Tölt</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Trot</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Pace</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Gallop</span><span class="score-val">—</span></div>
+                  <div class="score-item total-item"><span class="score-trait">Total</span><span class="score-val gold">—</span></div>
+                </div>
+                <div class="score-list">
+                  <div class="score-item"><span class="score-trait">Canter</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Rideability</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">General Impression</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Slow Tölt</span><span class="score-val">—</span></div>
+                  <div class="score-item" style="visibility:hidden;"><span class="score-trait">&nbsp;</span><span class="score-val">&nbsp;</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grand Total -->
+            <div class="fizo-grand-total">
+              <span class="fizo-grand-total-label">FIZO Total</span>
+              <span class="fizo-grand-total-score">—</span>
+            </div>
+
+          </div>
+
+          <!-- Color Genetics (optional — remove if not applicable) -->
+          <div class="genetics-block">
+            <p class="genetics-label">Color Genetics</p>
+            <div class="genetics-tags">
+              <!-- Add one gene-tag per locus. Use class="gene-tag highlighted" for notable genes. -->
+              <span class="gene-tag">ee</span>
+              <span class="gene-tag">aa</span>
+              <span class="gene-tag highlighted">Zz</span>
+            </div>
+            <p class="genetics-note">Placeholder — replace with actual genotype. Highlighted tags indicate genes of particular interest.</p>
           </div>
 
           <!-- Pedigree -->
