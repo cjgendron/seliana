@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon — Seliana</title>
+<link href="https://fonts.googleapis.com/css2?family=Ruthie&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #2C5F7A; --slate: #3D5166; --chestnut: #8B5E3C;
+  --gold: #C9A84C; --mist: #A3C4D4; --neutral: #F5F8FA;
+  --white: #ffffff; --ink: #1E2A32; --ink-light: #6B7C87;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--neutral); } ::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 3px; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 60px;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+}
+.nav-logo { text-decoration: none; display: inline-flex; flex-direction: column; align-items: stretch; gap: 4px; user-select: none; }
+.nav-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.nav-logo-s { font-family: 'Ruthie', cursive; font-size: 42px; line-height: 0.85; color: var(--gold); }
+.nav-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: var(--ink); font-size: 19px; }
+.nav-logo-rest span { display: inline-block; }
+.nav-logo-rest .ke { letter-spacing: 0.04em; } .nav-logo-rest .kl { letter-spacing: 0.05em; } .nav-logo-rest .ki { letter-spacing: 0.05em; } .nav-logo-rest .ka1 { letter-spacing: 0.04em; } .nav-logo-rest .kn { letter-spacing: 0.02em; } .nav-logo-rest .ka2 { letter-spacing: 0; }
+.nav-logo-orn { display: flex; align-items: center; }
+.nav-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.75; }
+.nav-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--ink-light); transition: color 0.3s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 6px; }
+
+/* DROPDOWN */
+.nav-dropdown { position: relative; display: flex; align-items: center; }
+.nav-dropdown-trigger { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); transition: color 0.3s; cursor: pointer; display: flex; align-items: center; gap: 7px; background: none; border: none; font-family: 'Outfit', sans-serif; padding: 0; user-select: none; }
+.nav-dropdown-trigger:hover { color: var(--gold); }
+.nav-dropdown-trigger.open { color: var(--gold); }
+.nav-chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.25s; display: inline-block; flex-shrink: 0; }
+.nav-dropdown-trigger.open .nav-chevron { transform: rotate(-135deg) translateY(-2px); }
+.nav-dropdown-menu { position: absolute; top: calc(100% + 18px); left: 50%; background: rgba(255,255,255,0.98); backdrop-filter: blur(14px); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; box-shadow: 0 8px 32px rgba(30,42,50,0.12); padding: 10px 0; min-width: 190px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateX(-50%) translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 9px; height: 9px; background: rgba(255,255,255,0.98); border-left: 1px solid rgba(201,168,76,0.2); border-top: 1px solid rgba(201,168,76,0.2); }
+.nav-dropdown.active .nav-dropdown-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.nav-dropdown-menu a { display: block; padding: 10px 24px; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-light) !important; text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap; }
+.nav-dropdown-menu a:hover { color: var(--gold) !important; background: rgba(201,168,76,0.05); }
+.nav-dropdown-menu a + a { border-top: 1px solid rgba(163,196,212,0.2); }
+
+/* HAMBURGER */
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* MOBILE DRAWER */
+.nav-mobile-drawer { display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 199; background: rgba(255,255,255,0.98); backdrop-filter: blur(18px); box-shadow: 0 4px 24px rgba(30,42,50,0.10); padding-bottom: 28px; transform: translateY(-100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+.nav-mobile-drawer.open { transform: translateY(0); }
+.nav-mobile-drawer-inner { padding: 0 28px; display: flex; flex-direction: column; }
+.nav-mobile-spacer { height: 72px; border-bottom: 1px solid rgba(163,196,212,0.25); margin-bottom: 8px; }
+.nav-mobile-drawer a, .nav-mobile-herd-trigger { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--ink-light); padding: 14px 0; border: none; border-bottom: 1px solid rgba(163,196,212,0.2); transition: color 0.2s; display: flex; align-items: center; justify-content: space-between; background: none; outline: none; font-family: 'Outfit', sans-serif; cursor: pointer; width: 100%; }
+.nav-mobile-drawer a:last-child { border-bottom: none; }
+.nav-mobile-drawer a:hover, .nav-mobile-herd-trigger:hover { color: var(--gold); }
+.nav-mobile-herd-sub { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; display: flex; flex-direction: column; }
+.nav-mobile-herd-sub.open { max-height: 200px; }
+.nav-mobile-herd-sub a { padding: 11px 0 11px 18px; font-size: 10px; letter-spacing: 2.5px; color: var(--ink-light); border-bottom: 1px solid rgba(163,196,212,0.15); }
+.nav-mobile-herd-sub a:last-child { border-bottom: none; }
+.nav-mobile-drawer .nav-mobile-cta { margin-top: 20px; background: var(--gold) !important; color: var(--white) !important; padding: 13px 0; border-radius: 6px; text-align: center; justify-content: center; letter-spacing: 3px; border-bottom: none !important; }
+.nav-mobile-chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.25s; display: inline-block; flex-shrink: 0; }
+.nav-mobile-herd-trigger.open .nav-mobile-chevron { transform: rotate(-135deg) translateY(-2px); }
+
+/* PAGE HERO */
+.page-hero { background: var(--ink); padding: 140px 60px 80px; position: relative; overflow: hidden; }
+.page-hero-bg { position: absolute; inset: -10%; background-image: url('https://images.unsplash.com/photo-1449927863916-6dab08b8bde3?w=1800&q=80'); background-size: cover; background-position: center 30%; opacity: 0.18; }
+.page-hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
+.page-hero-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; font-weight: 400; }
+.page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 76px); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 20px; }
+.page-hero h1 em { font-style: italic; color: var(--gold); }
+.page-hero-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 480px; line-height: 1.8; }
+
+/* COMING SOON BODY */
+.coming-soon-section { background: var(--white); padding: 96px 60px 120px; }
+.coming-soon-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+
+/* Large decorative diamond */
+.cs-ornament { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 48px; }
+.cs-ornament-line { height: 1px; width: 80px; background: linear-gradient(to right, transparent, var(--gold)); opacity: 0.6; }
+.cs-ornament-line.right { background: linear-gradient(to left, transparent, var(--gold)); }
+.cs-ornament-diamond { width: 10px; height: 10px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; opacity: 0.8; }
+.cs-ornament-dot { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; opacity: 0.4; }
+
+.cs-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 22px; }
+
+.cs-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 62px); font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: 28px; }
+.cs-headline em { font-style: italic; color: var(--primary); }
+
+.cs-body { font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--ink-light); max-width: 540px; margin: 0 auto 52px; }
+
+/* Divider rule */
+.cs-divider { display: flex; align-items: center; gap: 16px; margin: 0 auto 52px; max-width: 300px; }
+.cs-divider-seg { height: 1px; background: rgba(0,0,0,0.08); flex: 1; }
+.cs-divider-icon { font-size: 8px; color: var(--gold); opacity: 0.6; letter-spacing: 2px; }
+
+/* Notify block */
+.cs-notify { background: var(--neutral); border: 1px solid rgba(0,0,0,0.05); border-radius: 16px; padding: 44px 48px; max-width: 520px; margin: 0 auto 60px; }
+.cs-notify-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 18px; }
+.cs-notify-form { display: flex; gap: 10px; }
+.cs-notify-input { flex: 1; background: var(--white); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 13px 16px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; color: var(--ink); outline: none; transition: border-color 0.2s; }
+.cs-notify-input:focus { border-color: var(--primary); }
+.cs-notify-input::placeholder { color: rgba(30,42,50,0.3); }
+.cs-notify-btn { padding: 13px 22px; background: var(--primary); color: var(--white); border: none; border-radius: 8px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; transition: background 0.2s, transform 0.2s; white-space: nowrap; }
+.cs-notify-btn:hover { background: var(--slate); transform: translateY(-1px); }
+.cs-notify-note { font-size: 12px; font-weight: 300; color: var(--ink-light); margin-top: 14px; line-height: 1.6; }
+
+/* Return link */
+.cs-return { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+.cs-return:hover { color: var(--primary); }
+.cs-return-arrow { width: 20px; height: 1px; background: currentColor; position: relative; transition: width 0.2s; }
+.cs-return-arrow::before { content: ''; position: absolute; left: 0; top: -3px; width: 7px; height: 7px; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); }
+.cs-return:hover .cs-return-arrow { width: 28px; }
+
+/* FOOTER */
+footer { background: var(--ink); padding: 64px 60px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
+.footer-logo { display: inline-flex; flex-direction: column; align-items: stretch; gap: 5px; user-select: none; margin-bottom: 14px; }
+.footer-logo-name { display: flex; align-items: baseline; line-height: 1; }
+.footer-logo-s { font-family: 'Ruthie', cursive; font-size: 52px; line-height: 0.85; color: var(--gold); }
+.footer-logo-rest { font-family: 'Cormorant Garamond', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; line-height: 1; display: inline-flex; align-items: baseline; color: rgba(255,255,255,0.9); font-size: 24px; }
+.footer-logo-rest span { display: inline-block; }
+.footer-logo-rest .ke { letter-spacing: 0.04em; } .footer-logo-rest .kl { letter-spacing: 0.05em; } .footer-logo-rest .ki { letter-spacing: 0.05em; } .footer-logo-rest .ka1 { letter-spacing: 0.04em; } .footer-logo-rest .kn { letter-spacing: 0.02em; } .footer-logo-rest .ka2 { letter-spacing: 0; }
+.footer-logo-orn { display: flex; align-items: center; }
+.footer-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.7; }
+.footer-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
+.footer-tagline { font-size: 13px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.35); max-width: 210px; }
+.footer-col h5 { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 18px; font-weight: 500; }
+.footer-col a { display: block; color: rgba(255,255,255,0.46); text-decoration: none; font-size: 13px; font-weight: 300; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 300; }
+.footer-rule { width: 28px; height: 2px; background: var(--gold); border-radius: 1px; }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile-drawer { display: block; }
+  .page-hero, .coming-soon-section { padding-left: 24px; padding-right: 24px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .cs-notify { padding: 32px 24px; }
+  .cs-notify-form { flex-direction: column; }
+}
+@media (max-width: 600px) {
+  footer { padding: 52px 24px 28px; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-name"><span class="nav-logo-s">S</span><span class="nav-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+    <div class="nav-logo-orn"><div class="nav-logo-orn-seg"></div><div class="nav-logo-orn-diamond"></div><div class="nav-logo-orn-seg"></div></div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-dropdown" id="herdDropdown">
+      <button class="nav-dropdown-trigger" id="herdTrigger" aria-haspopup="true" aria-expanded="false">
+        Our Herd <span class="nav-chevron"></span>
+      </button>
+      <div class="nav-dropdown-menu" role="menu">
+        <a href="mares.html" role="menuitem">Mares</a>
+        <a href="stallions.html" role="menuitem">Stallions</a>
+        <a href="bred-by-seliana.html" role="menuitem">Bred by Seliana</a>
+      </div>
+    </div>
+    <a href="for-sale.html">Horses For Sale</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html" class="nav-cta">Inquire</a>
+  </div>
+  <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-mobile-drawer" id="mobileDrawer">
+  <div class="nav-mobile-drawer-inner">
+    <div class="nav-mobile-spacer"></div>
+    <button class="nav-mobile-herd-trigger" id="mobileHerdTrigger">
+      Our Herd <span class="nav-mobile-chevron"></span>
+    </button>
+    <div class="nav-mobile-herd-sub" id="mobileHerdSub">
+      <a href="mares.html">Mares</a>
+      <a href="stallions.html">Stallions</a>
+      <a href="bred-by-seliana.html">Bred by Seliana</a>
+    </div>
+    <a href="for-sale.html">Horses For Sale</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html" class="nav-mobile-cta">Inquire</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Page Title Here</p>
+    <h1>Something<br><em>wonderful</em><br>is coming.</h1>
+    <p class="page-hero-sub">We're putting the finishing touches on this page. Check back soon.</p>
+  </div>
+</div>
+
+<!-- COMING SOON BODY -->
+<section class="coming-soon-section">
+  <div class="coming-soon-inner">
+
+    <div class="cs-ornament reveal">
+      <div class="cs-ornament-line"></div>
+      <div class="cs-ornament-dot"></div>
+      <div class="cs-ornament-diamond"></div>
+      <div class="cs-ornament-dot"></div>
+      <div class="cs-ornament-line right"></div>
+    </div>
+
+    <p class="cs-eyebrow reveal">Under Construction</p>
+
+    <h2 class="cs-headline reveal">
+      We're working on<br><em>something good.</em>
+    </h2>
+
+    <p class="cs-body reveal">
+      This page is on its way. In the meantime, feel free to explore the rest of the site — or reach out directly if you have a question we can answer right now.
+    </p>
+
+    <div class="cs-divider reveal">
+      <div class="cs-divider-seg"></div>
+      <div class="cs-divider-icon">◆</div>
+      <div class="cs-divider-seg"></div>
+    </div>
+
+    <div class="cs-notify reveal" style="display: none;">
+      <p class="cs-notify-label">Get notified when this page is ready</p>
+      <div class="cs-notify-form">
+        <input type="email" class="cs-notify-input" placeholder="your@email.com">
+        <button class="cs-notify-btn" id="notifyBtn">Notify Me</button>
+      </div>
+      <p class="cs-notify-note">No spam — just a single note when this page goes live.</p>
+    </div>
+
+    <a href="index.html" class="cs-return reveal">
+      <span class="cs-return-arrow"></span>
+      Return to Homepage
+    </a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-name"><span class="footer-logo-s">S</span><span class="footer-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
+          <div class="footer-logo-orn"><div class="footer-logo-orn-seg"></div><div class="footer-logo-orn-diamond"></div><div class="footer-logo-orn-seg"></div></div>
+        </div>
+        <p class="footer-tagline">Icelandic horse breeders and importers placing exceptional horses across the US.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Horses</h5>
+        <a href="for-sale.html">Available Now</a>
+        <a href="for-sale.html">Foals</a>
+        <a href="for-sale.html">Breeding Stock</a>
+        <a href="contact.html">Custom Imports</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="index.html">Our Story</a>
+        <a href="journal.html">Journal</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Follow</h5>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Seliana. All rights reserved.</p>
+      <div class="footer-rule"></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Notify button
+document.getElementById('notifyBtn').addEventListener('click', function() {
+  const input = this.previousElementSibling;
+  if (input.value && input.value.includes('@')) {
+    this.textContent = 'Subscribed ✓';
+    this.style.background = '#4a8c6e';
+    input.disabled = true;
+    input.style.opacity = '0.5';
+    setTimeout(() => {
+      this.textContent = 'Notify Me';
+      this.style.background = '';
+      input.disabled = false;
+      input.style.opacity = '';
+      input.value = '';
+    }, 4000);
+  } else {
+    input.style.borderColor = '#c08080';
+    input.focus();
+    setTimeout(() => input.style.borderColor = '', 1500);
+  }
+});
+
+// Desktop dropdown
+const herdDropdown = document.getElementById('herdDropdown');
+const herdTrigger = document.getElementById('herdTrigger');
+herdTrigger.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = herdDropdown.classList.toggle('active');
+  herdTrigger.classList.toggle('open', isOpen);
+  herdTrigger.setAttribute('aria-expanded', isOpen);
+});
+document.addEventListener('click', () => {
+  herdDropdown.classList.remove('active');
+  herdTrigger.classList.remove('open');
+  herdTrigger.setAttribute('aria-expanded', false);
+});
+herdDropdown.querySelector('.nav-dropdown-menu').addEventListener('click', e => e.stopPropagation());
+
+// Mobile drawer
+const hamburger = document.getElementById('hamburger');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const mobileHerdTrigger = document.getElementById('mobileHerdTrigger');
+const mobileHerdSub = document.getElementById('mobileHerdSub');
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileDrawer.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+mobileHerdTrigger.addEventListener('click', () => {
+  const isOpen = mobileHerdSub.classList.toggle('open');
+  mobileHerdTrigger.classList.toggle('open', isOpen);
+});
+mobileDrawer.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+</script>
+</body>
+</html>
