@@ -222,7 +222,6 @@ nav.scrolled .nav-hamburger span, nav.solid .nav-hamburger span { background: va
 .parallax-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(20,35,45,0.72) 0%, rgba(20,35,45,0.35) 60%, rgba(20,35,45,0.1) 100%); }
 .parallax-banner-content { position: relative; z-index: 2; max-width: 1100px; width: 100%; padding: 0 60px; }
 .parallax-banner-content .section-tag { color: rgba(201,168,76,0.9); }
-/*.parallax-banner-content .section-h { max-width: 520px; margin-bottom: 18px; }*/
 .parallax-banner-content .section-h { margin-bottom: 18px; }
 .parallax-banner-content .body-text { color: rgba(255,255,255,0.75); max-width: 420px; margin-bottom: 36px; }
 
@@ -233,6 +232,135 @@ nav.scrolled .nav-hamburger span, nav.solid .nav-hamburger span { background: va
 .text-section .section-h { margin-bottom: 32px; color: #1E2A32; }
 .text-section .body-text { color: #6B7C87; margin-bottom: 24px; }
 .text-section .body-text:last-of-type { margin-bottom: 0; }
+
+/* ─── TESTIMONIALS SECTION ─── */
+.testimonials-section {
+  background: #ffffff;
+  padding: 100px 60px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+.testimonials-inner { max-width: 1100px; margin: 0 auto; }
+.testimonials-header { text-align: center; margin-bottom: 56px; }
+.testimonials-header .section-tag { margin-bottom: 12px; }
+.testimonials-header .section-h { margin-bottom: 0; }
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.tcard {
+  background: #F5F8FA;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 36px 32px 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.tcard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(30,42,50,0.09);
+}
+.tcard::before {
+  content: '\201C';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--mist);
+  opacity: 0.6;
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  pointer-events: none;
+}
+
+.tcard-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 18px;
+}
+.tcard-stars svg {
+  width: 12px;
+  height: 12px;
+  fill: var(--gold);
+}
+
+.tcard-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--ink);
+  flex: 1;
+  margin-bottom: 28px;
+}
+.tcard-quote em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.tcard-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+}
+.tcard-initials {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--mist), var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.tcard-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+.tcard-loc {
+  font-size: 11px;
+  color: var(--ink-light);
+  font-weight: 300;
+}
+
+.testimonials-cta {
+  text-align: center;
+}
+.btn-outline-dark {
+  display: inline-block;
+  border: 1px solid rgba(44,95,122,0.35);
+  color: var(--primary);
+  padding: 13px 32px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.btn-outline-dark:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--white);
+}
 
 /* ─── FOOTER ─── */
 footer { background: var(--ink); padding: 64px 60px 32px; }
@@ -274,6 +402,8 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .text-section { padding: 72px 36px; }
   .parallax-banner-content { padding: 0 36px; }
+  .testimonials-section { padding: 72px 36px; }
+  .testimonials-grid { grid-template-columns: 1fr; gap: 16px; }
 }
 @media (max-width: 600px) {
   .hero h1 { font-size: 44px; }
@@ -281,6 +411,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
   .footer-top { grid-template-columns: 1fr; }
   .text-section { padding: 60px 24px; }
   .parallax-banner-content { padding: 0 24px; }
+  .testimonials-section { padding: 60px 24px; }
 }
 </style>
 </head>
@@ -344,8 +475,8 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
     <h1>Straight from Iceland.<br><em>Straight with you.</em></h1>
     <p class="hero-sub">We breed, import, and place exceptional Icelandic horses with families and programs across the United States.</p>
     <div class="hero-btns">
-      <a href="#" class="btn-gold">View Available Horses</a>
-      <a href="#" class="btn-outline">Learn More</a>
+      <a href="for-sale.html" class="btn-gold">View Available Horses</a>
+      <a href="#philosophy" class="btn-outline">Learn More</a>
     </div>
   </div>
   <div class="hero-scroll-hint">
@@ -354,7 +485,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 </section>
 
 <!-- TEXT SECTION -->
-<section class="text-section">
+<section class="text-section" id="philosophy">
   <div class="text-section-inner">
     <p class="section-tag reveal">Our Philosophy</p>
     <h2 class="section-h reveal">The Icelandic Horse,<br><em>at home in America</em></h2>
@@ -380,21 +511,87 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
       We don't list horses for other people. We don't take commissions on horses we haven't touched.<br>
       Every horse at Seliana has been ours first. When they leave our hands, we know what we're sending you.
     </p>
-    <a href="#" class="btn-gold reveal">Call to Action</a>
+    <a href="contact.html" class="btn-gold reveal">Get in Touch</a>
   </div>
 </section>
 
-<!-- TEXT SECTION -->
-<section class="text-section">
-  <div class="text-section-inner">
-    <p class="section-tag reveal">Title Here</p>
-    <h2 class="section-h reveal">Lorem ipsum dolor<br><em>sit amet.</em></h2>
-    <p class="body-text reveal">
-      Fusce a est pulvinar, volutpat ex feugiat, imperdiet nulla. Mauris eu rhoncus sapien. Praesent ac tellus vel mauris porttitor maximus. Fusce at ipsum sed dui commodo viverra ac fringilla ipsum. Praesent in ipsum ornare, maximus dolor nec, ultrices metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin finibus arcu et magna dignissim fringilla. Mauris vitae placerat est. Vestibulum eu mauris mollis, mattis est vel, scelerisque erat.
-    </p>
-    <p class="body-text reveal">
-      Morbi nisl lacus, condimentum quis tellus quis, luctus lacinia nibh. Phasellus sit amet quam eget leo rutrum ultrices. Nullam sagittis dapibus dolor, a posuere lectus porta nec. Nam sit amet maximus risus. Pellentesque sollicitudin nunc metus, sed porttitor erat elementum et. Mauris non enim commodo, mollis dui eu, suscipit tellus. Maecenas risus enim, mattis at luctus vestibulum, fringilla et magna. Sed nunc turpis, posuere bibendum mauris eget, facilisis eleifend est. Nullam sed lacus eu augue maximus scelerisque. Vestibulum eget odio fringilla, finibus libero vel, imperdiet lacus. In rutrum egestas metus. Etiam mattis risus commodo risus mollis congue.
-    </p>
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials-section">
+  <div class="testimonials-inner">
+
+    <div class="testimonials-header">
+      <p class="section-tag reveal">In Their Own Words</p>
+      <h2 class="section-h reveal">What our <em>buyers say.</em></h2>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <div class="tcard reveal">
+        <div>
+          <div class="tcard-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          </div>
+          <p class="tcard-quote">Apparently he was <em>born already gait-trained and broken in.</em> We joked all summer that I could probably just get on and ride, so I gave it a try… no leading, no lunging. We were floored by how good he was.</p>
+        </div>
+        <div class="tcard-footer">
+          <div class="tcard-initials">VV</div>
+          <div>
+            <p class="tcard-name">Victoria V.</p>
+            <p class="tcard-loc">Norway &nbsp;·&nbsp; Baldur frá Gröf I</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard reveal">
+        <div>
+          <div class="tcard-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          </div>
+          <p class="tcard-quote">I met my filly when she was 3 months old and was immediately struck with her gentle demeanor, curiosity and trusting nature. <em>I knew immediately that Hending was the Icelandic horse I had been dreaming of.</em></p>
+        </div>
+        <div class="tcard-footer">
+          <div class="tcard-initials">LA</div>
+          <div>
+            <p class="tcard-name">Laura A.</p>
+            <p class="tcard-loc">Georgia, USA &nbsp;·&nbsp; Hending from Seliana</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard reveal">
+        <div>
+          <div class="tcard-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          </div>
+          <p class="tcard-quote">Sproti was <em>worth every penny and then some.</em> He’s very willing and desires to connect. I originally planned to raise him, train then sell but not sure I’ll be able to let him go!</em></p>
+        </div>
+        <div class="tcard-footer">
+          <div class="tcard-initials">YD</div>
+          <div>
+            <p class="tcard-name">Yvonne D.</p>
+            <p class="tcard-loc">New York, USA &nbsp;·&nbsp; Sproti from Seliana</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="testimonials-cta reveal">
+      <a href="testimonials.html" class="btn-outline-dark">Read All Testimonials →</a>
+    </div>
+
   </div>
 </section>
 
