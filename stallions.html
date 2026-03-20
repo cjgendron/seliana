@@ -274,7 +274,7 @@ nav {
 .fizo-grand-total {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 20px; margin-top: 12px;
-  background: var(--ink); border-radius: 3px;
+  background: var(--primary); border-radius: 3px;
 }
 .fizo-grand-total-label {
   font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
@@ -282,7 +282,7 @@ nav {
 }
 .fizo-grand-total-score {
   font-family: 'Cormorant Garamond', serif; font-size: 28px;
-  font-weight: 600; color: var(--gold); line-height: 1;
+  font-weight: 600; color: var(--white); line-height: 1;
 }
 
 /* Color Genetics */
@@ -579,7 +579,6 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
                 </span>
               </div>
             </div>
-
             <p class="breeding-notes">
               All shipped semen services are provided at Cornell University. Additional travel fees may apply. Please contact us for full breeding contract.
             </p>
@@ -595,14 +594,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
       <!-- Full-width photo -->
       <div class="stallion-photo">
-        <div class="stallion-photo-placeholder">
-          <svg width="80" height="80" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
-            <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <span>Photo coming soon</span>
-        </div>
+        <div class="stallion-photo-img" style="background-image:url('stallions-kiljan.jpeg');"></div>
         <div class="availability-badge">
           <div class="availability-dot available"></div>
           <span class="availability-label">Available for Breeding</span>
@@ -614,16 +606,17 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
         <!-- Main left column -->
         <div class="stallion-main">
-          <h2 class="stallion-name">Stallion Name <em>frá Place</em></h2>
-          <p class="stallion-subtitle">ISXXXXXXX &nbsp;·&nbsp; Color &nbsp;·&nbsp; Breed Year</p>
+          <h2 class="stallion-name">Kiljan <em>frá Korpu</em></h2>
+          <p class="stallion-subtitle">IS2016101005 &nbsp;·&nbsp; Chestnut</p>
           <div class="stallion-rule"></div>
 
           <!-- Vitals -->
           <div class="stallion-vitals">
             <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
             <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
-            <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">—</p></div>
-            <div class="vital"><p class="vital-label">Height</p><p class="vital-value">—</p></div>
+            <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">121</p></div>
+            <div class="vital"><p class="vital-label">Height</p><p class="vital-value">15.0 hh</p></div>
+            <div class="vital"><p class="vital-label">FIZO Score</p><p class="vital-value">8.22 🥇</p></div>
           </div>
 
           <!-- FIZO Scores (optional — remove this block if no scores available) -->
@@ -633,17 +626,17 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
               <p class="fizo-subsection-title">Conformation</p>
               <div class="score-row">
                 <div class="score-list">
-                  <div class="score-item"><span class="score-trait">Head</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Neck · Withers · Shoulders</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Back &amp; Croup</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Proportions</span><span class="score-val">—</span></div>
-                  <div class="score-item total-item"><span class="score-trait">Total</span><span class="score-val gold">—</span></div>
+                  <div class="score-item"><span class="score-trait">Head</span><span class="score-val">8.0</span></div>
+                  <div class="score-item"><span class="score-trait">Neck · Withers · Shoulders</span><span class="score-val">8.5</span></div>
+                  <div class="score-item"><span class="score-trait">Back &amp; Croup</span><span class="score-val">8.0</span></div>
+                  <div class="score-item"><span class="score-trait">Proportions</span><span class="score-val">9.0</span></div>
+                  <div class="score-item total-item"><span class="score-trait">Total</span><span class="score-val">8.56 🥇</span></div>
                 </div>
                 <div class="score-list">
-                  <div class="score-item"><span class="score-trait">Legs</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Joints</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Hooves</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Mane &amp; Tail</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Legs</span><span class="score-val">9</span></div>
+                  <div class="score-item"><span class="score-trait">Joints</span><span class="score-val">7.5</span></div>
+                  <div class="score-item"><span class="score-trait">Hooves</span><span class="score-val">9</span></div>
+                  <div class="score-item"><span class="score-trait">Mane &amp; Tail</span><span class="score-val">8.5</span></div>
                   <div class="score-item" style="visibility:hidden;"><span class="score-trait">&nbsp;</span><span class="score-val">&nbsp;</span></div>
                 </div>
               </div>
@@ -652,24 +645,24 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
               <p class="fizo-subsection-title">Rideability</p>
               <div class="score-row">
                 <div class="score-list">
-                  <div class="score-item"><span class="score-trait">Tölt</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Trot</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Pace</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Gallop</span><span class="score-val">—</span></div>
-                  <div class="score-item total-item"><span class="score-trait">Total</span><span class="score-val gold">—</span></div>
+                  <div class="score-item"><span class="score-trait">Tölt</span><span class="score-val">8.5</span></div>
+                  <div class="score-item"><span class="score-trait">Trot</span><span class="score-val">8</span></div>
+                  <div class="score-item"><span class="score-trait">Pace</span><span class="score-val">8</span></div>
+                  <div class="score-item"><span class="score-trait">Gallop</span><span class="score-val">8</span></div>
+                  <div class="score-item total-item"><span class="score-trait">Total</span><span class="score-val">8.04 🥇</span></div>
                 </div>
                 <div class="score-list">
-                  <div class="score-item"><span class="score-trait">Canter</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Rideability</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">General Impression</span><span class="score-val">—</span></div>
-                  <div class="score-item"><span class="score-trait">Slow Tölt</span><span class="score-val">—</span></div>
+                  <div class="score-item"><span class="score-trait">Canter</span><span class="score-val">8</span></div>
+                  <div class="score-item"><span class="score-trait">Rideability</span><span class="score-val">8.5</span></div>
+                  <div class="score-item"><span class="score-trait">General Impression</span><span class="score-val">8</span></div>
+                  <div class="score-item"><span class="score-trait">Slow Tölt</span><span class="score-val">8</span></div>
                   <div class="score-item" style="visibility:hidden;"><span class="score-trait">&nbsp;</span><span class="score-val">&nbsp;</span></div>
                 </div>
               </div>
             </div>
             <div class="fizo-grand-total">
               <span class="fizo-grand-total-label">FIZO Total</span>
-              <span class="fizo-grand-total-score">—</span>
+              <span class="fizo-grand-total-score">8.22 🥇</span>
             </div>
           </div>
 
@@ -677,9 +670,9 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
           <div class="genetics-block">
             <p class="genetics-label">Color Genetics</p>
             <div class="genetics-tags">
-              <span class="gene-tag">—</span>
+              <span class="gene-tag">ee</span>
+              <span class="gene-tag">aa</span>
             </div>
-            <p class="genetics-note">Placeholder — replace with actual genotype.</p>
           </div>
 
           <!-- Pedigree -->
@@ -702,12 +695,12 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
             <p class="breeding-panel-title">Breeding Information</p>
             <div class="breeding-row">
               <p class="breeding-row-label">Standing At</p>
-              <p class="breeding-row-value">Location Name<br>State, USA</p>
+              <p class="breeding-row-value">Seliana Stables<br>New York, USA</p>
             </div>
             <div class="breeding-divider"></div>
             <div class="breeding-row">
               <p class="breeding-row-label">Stud Fee</p>
-              <p class="breeding-row-value accent">Fee on Request</p>
+              <p class="breeding-row-value accent">$1,500</p>
             </div>
             <div class="breeding-divider"></div>
             <div class="breeding-row breeding-services">
@@ -730,6 +723,90 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
             <p class="breeding-notes">
               All shipped semen services are provided at Cornell University. Additional travel fees may apply. Please contact us for full breeding contract.
             </p>
+            <a href="contact.html" class="breeding-cta">Breeding Inquiry</a>
+          </div>
+        </div>
+
+      </div><!-- /.stallion-body -->
+    </div><!-- /.stallion-block -->
+
+    <!-- ── STALLION 3 PLACEHOLDER ── -->
+    <div class="stallion-block" id="stallion-2">
+
+      <!-- Full-width photo -->
+      <div class="stallion-photo">
+        <div class="stallion-photo-placeholder">
+          <span>Photo coming soon!</span>
+        </div>
+        <div class="availability-badge">
+          <div class="availability-dot available"></div>
+          <span class="availability-label">Available for Breeding</span>
+        </div>
+      </div>
+
+      <!-- Body: main info + sidebar -->
+      <div class="stallion-body">
+
+        <!-- Main left column -->
+        <div class="stallion-main">
+          <h2 class="stallion-name">Berg-Steinn <em>frá Kjartansstöðum</em></h2>
+          <p class="stallion-subtitle">IS2015182341 &nbsp;·&nbsp; Bay</p>
+          <div class="stallion-rule"></div>
+
+          <!-- Vitals -->
+          <div class="stallion-vitals">
+            <div class="vital"><p class="vital-label">Origin</p><p class="vital-value">Iceland</p></div>
+            <div class="vital"><p class="vital-label">DMRT3</p><p class="vital-value">AA</p></div>
+            <div class="vital"><p class="vital-label">BLUP</p><p class="vital-value">102</p></div>
+            <div class="vital"><p class="vital-label">Height</p><p class="vital-value">13.0 hh</p></div>
+          </div>
+
+          <!-- Color Genetics (optional — remove if not applicable) -->
+          <div class="genetics-block">
+            <p class="genetics-label">Color Genetics</p>
+            <div class="genetics-tags">
+              <span class="gene-tag">Ee</span>
+              <span class="gene-tag">Aa</span>
+            </div>
+          </div>
+
+          <!-- Pedigree -->
+          <div class="pedigree-block">
+            <p class="pedigree-label">Pedigree</p>
+            <div class="ped-tree">
+              <div class="ped-sire"><div><p class="ped-role">Sire</p><p class="ped-name placeholder">—</p></div></div>
+              <div class="ped-ss"><p class="ped-role">Grandsire</p><p class="ped-name placeholder">—</p></div>
+              <div class="ped-sd"><p class="ped-role">Sire's Dam</p><p class="ped-name placeholder">—</p></div>
+              <div class="ped-dam"><div><p class="ped-role">Dam</p><p class="ped-name placeholder">—</p></div></div>
+              <div class="ped-ds"><p class="ped-role">Damsire</p><p class="ped-name placeholder">—</p></div>
+              <div class="ped-dd"><p class="ped-role">2nd Dam</p><p class="ped-name placeholder">—</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breeding sidebar -->
+        <div class="stallion-sidebar">
+          <div class="breeding-panel">
+            <p class="breeding-panel-title">Breeding Information</p>
+            <div class="breeding-row">
+              <p class="breeding-row-label">Standing At</p>
+              <p class="breeding-row-value">Seliana Stables<br>New York, USA</p>
+            </div>
+            <div class="breeding-divider"></div>
+            <div class="breeding-row">
+              <p class="breeding-row-label">Stud Fee</p>
+              <p class="breeding-row-value accent">$1,000</p>
+            </div>
+            <div class="breeding-divider"></div>
+            <div class="breeding-row breeding-services">
+              <p class="breeding-row-label">Services Available</p>
+              <div style="margin-top: 10px; display: flex; flex-wrap: wrap;">
+                <span class="service-tag">
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#2C5F7A" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8 4.5" stroke="#2C5F7A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Live Cover
+                </span>
+              </div>
+            </div>
             <a href="contact.html" class="breeding-cta">Breeding Inquiry</a>
           </div>
         </div>
