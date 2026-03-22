@@ -74,37 +74,64 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 /* ─── LISTINGS ─── */
 .listings-section { padding: 80px 60px 120px; }
 .listings-inner { max-width: 1100px; margin: 0 auto; }
-
 .listings-intro { margin-bottom: 72px; }
 .listings-count { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 12px; }
 .listings-intro h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 40px); font-weight: 300; color: var(--ink); line-height: 1.15; margin-bottom: 12px; }
 .listings-intro h2 em { font-style: italic; color: var(--primary); }
 .listings-intro p { font-size: 14px; font-weight: 300; color: var(--ink-light); line-height: 1.8; max-width: 560px; }
 
-/* ─── HORSE LISTING ─── */
+/* ─── HORSE LISTING: HEADER ─── */
 .horse-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 62px); font-weight: 300; line-height: 1; color: var(--ink); margin-bottom: 8px; }
 .horse-name em { font-style: italic; color: var(--gold); }
-.horse-subtitle-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
-.horse-subtitle { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; }
-.horse-status-badge { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 500; padding: 4px 12px; border-radius: 4px; }
-.status-available { background: var(--gold); color: var(--white); }
-.status-pending   { background: rgba(139,94,60,0.1); color: var(--chestnut); border: 1px solid rgba(139,94,60,0.25); }
-.status-sold      { background: rgba(30,42,50,0.08); color: var(--ink-light); }
-
-.horse-rule { width: 32px; height: 1.5px; background: var(--gold); margin-bottom: 24px; }
-.horse-stats { display: flex; gap: 36px; flex-wrap: wrap; padding-bottom: 36px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 40px; }
-.stat-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 4px; }
-.stat-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.horse-subtitle { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 36px; }
 
 /* ─── GALLERY ─── */
-.horse-gallery { margin-bottom: 52px; }
-.gallery-hero { width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 4px; margin-bottom: 6px; background: linear-gradient(150deg, #edf2f5, #dde7ed); position: relative; cursor: pointer; }
+.horse-gallery { margin-bottom: 44px; position: relative; }
+
+.gallery-hero {
+  width: 100%; aspect-ratio: 16/9; overflow: hidden;
+  border-radius: 4px; margin-bottom: 6px;
+  background: linear-gradient(150deg, #edf2f5, #dde7ed);
+  position: relative; cursor: pointer;
+}
 .gallery-hero img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
 .gallery-hero:hover img { transform: scale(1.02); }
+
+/* Status badge — on the hero photo */
+.photo-status-badge {
+  position: absolute; top: 18px; left: 20px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 20px;
+  padding: 6px 14px 6px 10px;
+  font-size: 10px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ink);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  pointer-events: none;
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.status-dot.available {
+  background: #4caf7d;
+  box-shadow: 0 0 0 2px rgba(76,175,125,0.25);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+.status-dot.pending  { background: #d4a843; }
+.status-dot.sold     { background: #9ba8b0; }
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(76,175,125,0.25); }
+  50%       { box-shadow: 0 0 0 5px rgba(76,175,125,0.1); }
+}
+
+/* placeholder */
 .ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; pointer-events: none; }
 .ph svg { opacity: 0.13; }
 .ph span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); opacity: 0.4; }
-.gallery-grid { display: grid; gap: 6px; margin-top: 0; }
+
+.gallery-grid { display: grid; gap: 6px; }
 .gallery-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
 .gallery-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
 .gallery-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
@@ -113,6 +140,12 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 .gallery-cell { aspect-ratio: 4/3; overflow: hidden; border-radius: 3px; background: linear-gradient(150deg, #edf2f5, #dde7ed); position: relative; cursor: pointer; }
 .gallery-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
 .gallery-cell:hover img { transform: scale(1.06); }
+
+/* ─── STATS ─── */
+.horse-rule { width: 32px; height: 1.5px; background: var(--gold); margin-bottom: 24px; }
+.horse-stats { display: flex; gap: 36px; flex-wrap: wrap; padding-bottom: 36px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 40px; }
+.stat-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 4px; }
+.stat-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.2; }
 
 /* ─── DESCRIPTION ─── */
 .horse-desc { max-width: 720px; margin-bottom: 48px; }
@@ -220,7 +253,6 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
       <div class="nav-dropdown-menu" role="menu">
         <a href="mares.html" role="menuitem">Mares</a>
         <a href="stallions.html" role="menuitem">Stallions</a>
-        <a href="bred-by-seliana.html" role="menuitem">Bred by Seliana</a>
       </div>
     </div>
     <a href="for-sale.html" class="active">Horses For Sale</a>
@@ -239,7 +271,6 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
     <div class="nav-mobile-herd-sub" id="mobileHerdSub">
       <a href="mares.html">Mares</a>
       <a href="stallions.html">Stallions</a>
-      <a href="bred-by-seliana.html">Bred by Seliana</a>
     </div>
     <a href="for-sale.html" class="active">Horses For Sale</a>
     <a href="testimonials.html">Testimonials</a>
@@ -254,7 +285,9 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
   <div class="page-hero-content">
     <p class="page-hero-eyebrow">Available Now</p>
     <h1>Horses looking for<br><em>their person.</em></h1>
-    <p class="page-hero-sub">Every horse here has been raised, handled, and prepared with care. They don't just arrive — they arrive ready.</p>
+    <p class="page-hero-sub">
+      We keep this list short on purpose. Every horse here is owned by us and sold by us directly. No brokers. No commissions. No hidden costs.
+    </p>
   </div>
 </div>
 
@@ -262,7 +295,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 <section class="listings-section">
   <div class="listings-inner">
 
-    <div class="listings-intro reveal">
+    <div class="listings-intro reveal" style="display: none;">
       <p class="listings-count">2 Horses Available</p>
       <h2>Currently <em>for sale</em></h2>
       <p>We keep this list short on purpose. Every horse here is one we stand behind completely.</p>
@@ -271,52 +304,51 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
     <!-- ══════════════════════════════════════════
          HORSE 1 — HUMLA FROM SELIANA
-         Photos: replace placeholder divs with real
-         <img src="humla-1.jpg" alt="Humla from Seliana">
-         Grid: cols-2 for 2 secondary photos
     ══════════════════════════════════════════ -->
     <div class="horse-listing reveal">
 
+      <!-- ① HEADER: name + subtitle only -->
       <h2 class="horse-name">Humla <em>from Seliana</em></h2>
-      <div class="horse-subtitle-row">
-        <span class="horse-subtitle">US2023205989 &nbsp;·&nbsp; Dark Chestnut Filly &nbsp;·&nbsp; Star &amp; Snip</span>
-        <span class="horse-status-badge status-available">Available</span>
-      </div>
+      <p class="horse-subtitle">US2023205989 &nbsp;·&nbsp; Dark Chestnut Filly &nbsp;·&nbsp; 3 Years Old</p>
 
-      <div class="horse-rule"></div>
-      <div class="horse-stats">
-        <div class="stat"><p class="stat-label">Born</p><p class="stat-value">May 2023</p></div>
-        <div class="stat"><p class="stat-label">Gender</p><p class="stat-value">Filly</p></div>
-        <div class="stat"><p class="stat-label">Color</p><p class="stat-value">Dark Chestnut</p></div>
-        <div class="stat"><p class="stat-label">Height</p><p class="stat-value">~13.2 hh (mature ~13.3)</p></div>
-        <div class="stat"><p class="stat-label">DMRT3</p><p class="stat-value">AA — 5-gaited</p></div>
-        <div class="stat"><p class="stat-label">BLUP</p><p class="stat-value">114</p></div>
-        <div class="stat"><p class="stat-label">Sire</p><p class="stat-value">Rauðskeggur frá Kjarnholtum I (8.87)</p></div>
-        <div class="stat"><p class="stat-label">Dam</p><p class="stat-value">Hera frá Seltjarnarnesi</p></div>
-      </div>
-
+      <!-- ② GALLERY: status badge lives on the hero photo -->
       <div class="horse-gallery">
-        <!-- Hero photo -->
         <div class="gallery-hero">
           <img src="humie-2-26.png" alt="Humla from Seliana">
+          <div class="photo-status-badge">
+            <span class="status-dot available"></span>
+            Available
+          </div>
         </div>
-        <!-- 2 secondary photos (cols-2) -->
         <div class="gallery-grid cols-2" style="margin-top:6px;">
           <div class="gallery-cell">
             <img src="humla-4.jpg" alt="Humla from Seliana">
           </div>
           <div class="gallery-cell">
-            <img src="raudskeggur.jpg" alt="Humla from Seliana — sire photo">
+            <img src="raudskeggur.jpg" alt="Sire — Rauðskeggur frá Kjarnholtum I">
           </div>
         </div>
       </div>
 
+      <!-- ③ STATS -->
+      <div class="horse-rule"></div>
+      <div class="horse-stats">
+        <div class="stat"><p class="stat-label">Born</p><p class="stat-value">May 2023</p></div>
+        <div class="stat"><p class="stat-label">Sex</p><p class="stat-value">Filly</p></div>
+        <div class="stat"><p class="stat-label">Color</p><p class="stat-value">Dark Chestnut</p></div>
+        <div class="stat"><p class="stat-label">Height</p><p class="stat-value">13.3 hh (expected)</p></div>
+        <div class="stat"><p class="stat-label">DMRT3</p><p class="stat-value">AA</p></div>
+        <div class="stat"><p class="stat-label">BLUP</p><p class="stat-value">114</p></div>
+      </div>
+
+      <!-- ④ DESCRIPTION -->
       <div class="horse-desc">
         <p>Humla is a beautiful dark chestnut filly with a star and snip — stout and well-built, with a broad back and chest. She's currently standing around 13.2 hands and expected to mature to approximately 13.3. She moves with a natural preference for lateral gaits, and is genetically five-gaited.</p>
-        <p>Her sire, 1st prize Rauðskeggur frá Kjarnholtum (8.87), is one of the top ten highest-scoring stallions in Iceland today. Humla was imported in utero — giving her the rare advantage of elite Icelandic bloodlines that are typically unavailable to North American breeding programs, while still having the distinct benefits of being born and raised here. She carries the highest BLUP (114) of any Icelandic filly born in the USA.</p>
+        <p>Her sire, 1st prize Rauðskeggur frá Kjarnholtum (8.87), is one of the top ten highest-scoring stallions in Iceland today. Humla was imported in utero — giving her the rare advantage of elite Icelandic bloodlines that are typically unavailable to North American breeding programs, while still having the distinct benefits of being born and raised here.</p>
         <p>On the ground, Humla is unflappable and friendly, with an easy, social temperament that makes her a pleasure to be around. She's halter broke, trailers without fuss, and is excellent for groundwork and veterinary care — and whatever other tomfoolery her humans happen to dream up. She'll be ready to begin work under saddle next year, and would be an exceptional prospect for amateurs and professionals alike.</p>
       </div>
 
+      <!-- ⑤ CTA -->
       <div class="horse-footer">
         <div>
           <p class="horse-price-label">Asking Price</p>
@@ -343,52 +375,51 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
     <!-- ══════════════════════════════════════════
          HORSE 2 — HLJÓÐ FROM SELIANA
-         Photos: replace placeholder divs with real
-         <img src="hljod-1.jpg" alt="Hljóð from Seliana">
-         Grid: cols-2 for 2 secondary photos
     ══════════════════════════════════════════ -->
     <div class="horse-listing reveal">
 
+      <!-- ① HEADER -->
       <h2 class="horse-name">Hljóð <em>from Seliana</em></h2>
-      <div class="horse-subtitle-row">
-        <span class="horse-subtitle">Black Filly</span>
-        <span class="horse-status-badge status-available">Available</span>
-      </div>
+      <p class="horse-subtitle">US2025206173 &nbsp;·&nbsp; Black Filly &nbsp;·&nbsp; Yearling</p>
 
-      <div class="horse-rule"></div>
-      <div class="horse-stats">
-        <div class="stat"><p class="stat-label">Born</p><p class="stat-value">July 29, 2025</p></div>
-        <div class="stat"><p class="stat-label">Gender</p><p class="stat-value">Filly</p></div>
-        <div class="stat"><p class="stat-label">Color</p><p class="stat-value">Black</p></div>
-        <div class="stat"><p class="stat-label">Height</p><p class="stat-value">~14 hh (expected)</p></div>
-        <div class="stat"><p class="stat-label">DMRT3</p><p class="stat-value">AA — 5-gaited</p></div>
-        <div class="stat"><p class="stat-label">Sire</p><p class="stat-value">Kiljan frá Korpu (1st prize)</p></div>
-        <div class="stat"><p class="stat-label">Dam</p><p class="stat-value">Una frá Holtsmúla 1</p></div>
-      </div>
-
+      <!-- ② GALLERY -->
       <div class="horse-gallery">
-        <!-- Hero photo -->
         <div class="gallery-hero">
           <img src="hjlod2.jpg" alt="Hljóð from Seliana">
+          <div class="photo-status-badge">
+            <span class="status-dot available"></span>
+            Available
+          </div>
         </div>
-        <!-- 2 secondary photos (cols-2) -->
         <div class="gallery-grid cols-2" style="margin-top:6px;">
           <div class="gallery-cell">
             <img src="hjlod.jpg" alt="Hljóð from Seliana">
           </div>
           <div class="gallery-cell">
-            <img src="karp.jpg" alt="Hljóð from Seliana — sire Kiljan frá Korpu">
-            <div class="ph"><svg width="36" height="36" viewBox="0 0 72 72" fill="none"><path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/><circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/><path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <img src="karp.jpg" alt="Sire — Kiljan frá Korpu">
           </div>
         </div>
       </div>
 
-      <div class="horse-desc">
-        <p>Hljóð is a beautiful black filly, born July 29, 2025 — long-legged and refined, with an uphill build and elegant movement that already turns heads at liberty in the pasture. She shows all gaits freely in the field, with a clear preference for tölt. We expect her to mature to approximately 14 hands, which puts her at the taller end of the breed.</p>
-        <p>Her sire, 1st prize Kiljan frá Korpu, is not only a talented sport horse but a stallion with an exceptional temperament — something he's proven in the best possible way, having been shown in competition by a youth rider and selected for the North American Youth Cup in 2025. That combination of talent and tractability is exactly what we look for, and it shows in Hljóð.</p>
-        <p>She is up to date on farrier work, deworming, and halter breaking, and received her first round of core vaccines in March 2026. Her exceptional movement and pedigree make her a rare opportunity for someone looking for a young horse with both sport and breeding potential — the kind of filly that doesn't come along often.</p>
+      <!-- ③ STATS -->
+      <div class="horse-rule"></div>
+      <div class="horse-stats">
+        <div class="stat"><p class="stat-label">Born</p><p class="stat-value">July 2025</p></div>
+        <div class="stat"><p class="stat-label">Gender</p><p class="stat-value">Filly</p></div>
+        <div class="stat"><p class="stat-label">Color</p><p class="stat-value">Black</p></div>
+        <div class="stat"><p class="stat-label">Height</p><p class="stat-value">14.0 hh (expected)</p></div>
+        <div class="stat"><p class="stat-label">DMRT3</p><p class="stat-value">AA</p></div>
+        <div class="stat"><p class="stat-label">BLUP</p><p class="stat-value">115 (estimated)</p></div>
       </div>
 
+      <!-- ④ DESCRIPTION -->
+      <div class="horse-desc">
+        <p>Hljóð is a beautiful black filly, born July 29, 2025 — long-legged and refined, with an uphill build and elegant movement that already turns heads at liberty in the pasture. She shows all gaits freely in the field, with a clear preference for tölt. We expect her to mature to approximately 14 hands.</p>
+        <p>Her sire, 1st prize Kiljan frá Korpu, is not only a talented sport horse but a stallion with an exceptional temperament — something he's proven in the best possible way, having been shown in competition by a youth rider and selected for the North American Youth Cup in 2025. That combination of talent and tractability is exactly what we look for, and it shows in Hljóð.</p>
+        <p>She is up to date on farrier work, deworming, is halter broke, and received her first round of core vaccines in March 2026. Her exceptional movement and pedigree make her a rare opportunity for someone looking for a young horse with both sport and breeding potential — the kind of filly that doesn't come along often.</p>
+      </div>
+
+      <!-- ⑤ CTA -->
       <div class="horse-footer">
         <div>
           <p class="horse-price-label">Asking Price</p>
