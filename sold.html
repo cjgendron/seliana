@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>In Their New Homes — Seliana</title>
+<title>Sold Horses — Seliana</title>
 <link href="https://fonts.googleapis.com/css2?family=Ruthie&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -95,8 +95,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 .sold-card:hover .sold-photo { transform: scale(1.03); }
 
 /* Placeholder for horses without photos */
-.sold-photo-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #edf2f5, #e2eaef); }
-.sold-photo-placeholder svg { opacity: 0.14; }
+.sold-photo-placeholder { position: absolute; inset: 0; background: linear-gradient(150deg, #edf2f5, #e2eaef); }
 
 /* Sold banner overlay */
 .sold-overlay { position: absolute; top: 16px; left: 0; background: var(--ink); color: var(--white); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; padding: 5px 14px 5px 12px; font-weight: 500; display: flex; align-items: center; gap: 7px; }
@@ -106,8 +105,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 /* Info block */
 .sold-info { background: var(--white); border: 1px solid rgba(0,0,0,0.07); border-top: none; border-radius: 0 0 4px 4px; padding: 22px 24px 24px; }
 .sold-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 5px; }
-.sold-farm { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; font-style: italic; color: var(--ink-light); margin-bottom: 14px; }
-.sold-rule { width: 24px; height: 1.5px; background: var(--gold); margin-bottom: 14px; }
+.sold-farm { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 14px; }
+.sold-rule { width: 100%; height: 1px; background: rgba(0,0,0,0.08); margin-bottom: 14px; }
 .sold-meta { display: flex; flex-direction: column; gap: 6px; }
 .sold-meta-row { display: flex; align-items: baseline; gap: 8px; }
 .sold-meta-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; flex-shrink: 0; min-width: 76px; }
@@ -158,12 +157,9 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
   .page-hero, .sold-section, .closing-section { padding-left: 24px; padding-right: 24px; }
   .stat-bar { padding-left: 24px; padding-right: 24px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
-  .year-divider { grid-column: span 1; }
-  /* On mobile, year dividers only span 1 col; we handle this differently */
 }
 @media (max-width: 680px) {
   .sold-grid { grid-template-columns: 1fr; }
-  .year-divider { grid-column: span 1; }
   footer { padding: 52px 24px 28px; }
   .stat-num { font-size: 28px; }
 }
@@ -208,7 +204,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
       <a href="bred-by-seliana.html">Bred by Seliana</a>
     </div>
     <a href="for-sale.html">Horses For Sale</a>
-    <a href="sold.html" class="active">Placed Horses</a>
+    <a href="sold.html" class="active">Sold Horses</a>
     <a href="testimonials.html">Testimonials</a>
     <a href="journal.html">Journal</a>
     <a href="contact.html" class="nav-mobile-cta">Inquire</a>
@@ -219,9 +215,9 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 <div class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="page-hero-content">
-    <p class="page-hero-eyebrow">The Seliana Family</p>
-    <h1>In their<br><em>new homes.</em></h1>
-    <p class="page-hero-sub">Every horse we place is a match we believe in. Here's where they landed — and who they belong to now.</p>
+    <p class="page-hero-eyebrow">Seliana Success Stories</p>
+    <h1>Horses<br><em>we've sold.</em></h1>
+    <p class="page-hero-sub">Every horse we place is a match we believe in.</p>
   </div>
 </div>
 
@@ -233,7 +229,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
       <div class="stat-label">Countries</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-num">4</div>
+      <div class="stat-num">5</div>
       <div class="stat-label">US States</div>
     </div>
     <div class="stat-item reveal">
@@ -250,19 +246,12 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
       <div class="sold-card">
         <div class="sold-photo-wrap">
-          <!-- Replace src with actual photo: <div class="sold-photo" style="background-image:url('horse-name.jpg')"></div> -->
-          <div class="sold-photo-placeholder">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
-              <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
+          <div class="sold-photo" style="background-image:url('valdis.jpg')"></div>
           <div class="sold-overlay"><span class="sold-dot"></span>Sold</div>
         </div>
         <div class="sold-info">
-          <p class="sold-name">Horse Name Here</p>
-          <p class="sold-farm">frá Farm Name</p>
+          <p class="sold-name">Valdís from Seliana</p>
+          <p class="sold-farm">US2022205900</p>
           <div class="sold-rule"></div>
           <div class="sold-meta">
             <div class="sold-meta-row">
@@ -270,10 +259,10 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
               <span class="sold-meta-value">2022</span>
             </div>
             <div class="sold-meta-row">
-              <span class="sold-meta-label">Placed to</span>
+              <span class="sold-meta-label">Placed in</span>
               <span class="sold-meta-value sold-destination">
                 <svg class="dest-pin" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Georgia, USA
+                Kentucky, USA
               </span>
             </div>
           </div>
@@ -282,18 +271,12 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
       <div class="sold-card">
         <div class="sold-photo-wrap">
-          <div class="sold-photo-placeholder">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
-              <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
+          <div class="sold-photo" style="background-image:url('baldur-2.jpeg')"></div>
           <div class="sold-overlay"><span class="sold-dot"></span>Sold</div>
         </div>
         <div class="sold-info">
-          <p class="sold-name">Horse Name Here</p>
-          <p class="sold-farm">frá Farm Name</p>
+          <p class="sold-name">Baldur frá Gröf I</p>
+          <p class="sold-farm">IS2021155786</p>
           <div class="sold-rule"></div>
           <div class="sold-meta">
             <div class="sold-meta-row">
@@ -301,66 +284,11 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
               <span class="sold-meta-value">2021</span>
             </div>
             <div class="sold-meta-row">
-              <span class="sold-meta-label">Imported</span>
-              <span class="sold-meta-value">2024</span>
+              <span class="sold-meta-label">Exported</span>
+              <span class="sold-meta-value">2022</span>
             </div>
             <div class="sold-meta-row">
-              <span class="sold-meta-label">Placed to</span>
-              <span class="sold-meta-value sold-destination">
-                <svg class="dest-pin" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Virginia, USA
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hending — real horse from testimonials -->
-      <div class="sold-card">
-        <div class="sold-photo-wrap">
-          <div class="sold-photo" style="background-image:url('laura.jpg'); background-position: center top;"></div>
-          <div class="sold-overlay"><span class="sold-dot"></span>Sold</div>
-        </div>
-        <div class="sold-info">
-          <p class="sold-name">Hending from Seliana</p>
-          <p class="sold-farm">Bred by Seliana</p>
-          <div class="sold-rule"></div>
-          <div class="sold-meta">
-            <div class="sold-meta-row">
-              <span class="sold-meta-label">Born</span>
-              <span class="sold-meta-value">2024</span>
-            </div>
-            <div class="sold-meta-row">
-              <span class="sold-meta-label">Placed to</span>
-              <span class="sold-meta-value sold-destination">
-                <svg class="dest-pin" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Georgia, USA
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sold-card">
-        <div class="sold-photo-wrap">
-          <div class="sold-photo" style="background-image:url('victoria.png'); background-position: center;"></div>
-          <div class="sold-overlay"><span class="sold-dot"></span>Sold</div>
-        </div>
-        <div class="sold-info">
-          <p class="sold-name">Baldur frá Gröf I</p>
-          <p class="sold-farm">frá Gröf</p>
-          <div class="sold-rule"></div>
-          <div class="sold-meta">
-            <div class="sold-meta-row">
-              <span class="sold-meta-label">Born</span>
-              <span class="sold-meta-value">2020</span>
-            </div>
-            <div class="sold-meta-row">
-              <span class="sold-meta-label">Imported</span>
-              <span class="sold-meta-value">2023</span>
-            </div>
-            <div class="sold-meta-row">
-              <span class="sold-meta-label">Placed to</span>
+              <span class="sold-meta-label">Placed in</span>
               <span class="sold-meta-value sold-destination">
                 <svg class="dest-pin" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 Norway
@@ -372,33 +300,27 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
       <div class="sold-card">
         <div class="sold-photo-wrap">
-          <div class="sold-photo-placeholder">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
-              <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
+          <div class="sold-photo" style="background-image:url('brennir-2.jpeg')"></div>
           <div class="sold-overlay"><span class="sold-dot"></span>Sold</div>
         </div>
         <div class="sold-info">
-          <p class="sold-name">Horse Name Here</p>
-          <p class="sold-farm">frá Farm Name</p>
+          <p class="sold-name">Brennir frá Gröf I</p>
+          <p class="sold-farm">IS2022155789</p>
           <div class="sold-rule"></div>
           <div class="sold-meta">
             <div class="sold-meta-row">
               <span class="sold-meta-label">Born</span>
-              <span class="sold-meta-value">2018</span>
-            </div>
-            <div class="sold-meta-row">
-              <span class="sold-meta-label">Imported</span>
               <span class="sold-meta-value">2022</span>
             </div>
             <div class="sold-meta-row">
-              <span class="sold-meta-label">Placed to</span>
+              <span class="sold-meta-label">Exported</span>
+              <span class="sold-meta-value">2023</span>
+            </div>
+            <div class="sold-meta-row">
+              <span class="sold-meta-label">Placed in</span>
               <span class="sold-meta-value sold-destination">
                 <svg class="dest-pin" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                New York, USA
+                Germany
               </span>
             </div>
           </div>
@@ -407,29 +329,77 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 
       <div class="sold-card">
         <div class="sold-photo-wrap">
-          <div class="sold-photo-placeholder">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 56C12 56 16 40 28 36C34 34 38 30 40 24C42 18 46 14 52 14C58 14 62 18 62 24C62 30 58 36 52 38C46 40 42 44 42 56" stroke="#2C5F7A" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="52" cy="18" r="3" fill="#C9A84C" opacity="0.5"/>
-              <path d="M10 60L62 60" stroke="#A3C4D4" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
+          <div class="sold-photo" style="background-image:url('thorsson.jpg')"></div>
           <div class="sold-overlay"><span class="sold-dot"></span>Sold</div>
         </div>
         <div class="sold-info">
-          <p class="sold-name">Horse Name Here</p>
-          <p class="sold-farm">frá Farm Name</p>
+          <p class="sold-name">Þórsson frá Gröf I</p>
+          <p class="sold-farm">IS2024155960</p>
           <div class="sold-rule"></div>
           <div class="sold-meta">
             <div class="sold-meta-row">
               <span class="sold-meta-label">Born</span>
-              <span class="sold-meta-value">2019</span>
+              <span class="sold-meta-value">2024</span>
             </div>
             <div class="sold-meta-row">
-              <span class="sold-meta-label">Placed to</span>
+              <span class="sold-meta-label">Imported</span>
+              <span class="sold-meta-value">2025</span>
+            </div>
+            <div class="sold-meta-row">
+              <span class="sold-meta-label">Placed in</span>
               <span class="sold-meta-value sold-destination">
                 <svg class="dest-pin" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Pennsylvania, USA
+                Georgia, USA
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sold-card">
+        <div class="sold-photo-wrap">
+          <div class="sold-photo" style="background-image:url('varkar.jpeg')"></div>
+          <div class="sold-overlay"><span class="sold-dot"></span>Sold</div>
+        </div>
+        <div class="sold-info">
+          <p class="sold-name">Varkár frá Kjartansstöðum</p>
+          <p class="sold-farm">IS2022182345</p>
+          <div class="sold-rule"></div>
+          <div class="sold-meta">
+            <div class="sold-meta-row">
+              <span class="sold-meta-label">Born</span>
+              <span class="sold-meta-value">2022</span>
+            </div>
+            <div class="sold-meta-row">
+              <span class="sold-meta-label">Placed in</span>
+              <span class="sold-meta-value sold-destination">
+                <svg class="dest-pin" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Iceland
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sold-card">
+        <div class="sold-photo-wrap">
+          <div class="sold-photo" style="background-image:url('sproti.jpg')"></div>
+          <div class="sold-overlay"><span class="sold-dot"></span>Sold</div>
+        </div>
+        <div class="sold-info">
+          <p class="sold-name">Sproti from Seliana</p>
+          <p class="sold-farm">US2024106085</p>
+          <div class="sold-rule"></div>
+          <div class="sold-meta">
+            <div class="sold-meta-row">
+              <span class="sold-meta-label">Born</span>
+              <span class="sold-meta-value">2024</span>
+            </div>
+            <div class="sold-meta-row">
+              <span class="sold-meta-label">Placed in</span>
+              <span class="sold-meta-value sold-destination">
+                <svg class="dest-pin" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                New York, USA
               </span>
             </div>
           </div>
