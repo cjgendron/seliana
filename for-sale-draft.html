@@ -83,50 +83,38 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 /* ─── HORSE LISTING: HEADER ─── */
 .horse-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 62px); font-weight: 300; line-height: 1; color: var(--ink); margin-bottom: 8px; }
 .horse-name em { font-style: italic; color: var(--gold); }
-.horse-subtitle { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 36px; }
+.horse-subtitle { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; margin-bottom: 18px; }
+
+/* ─── LOCATION LINE ─── */
+.horse-location {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 32px;
+  padding: 11px 18px;
+  background: var(--neutral);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+  width: fit-content;
+}
+.horse-location svg { color: var(--primary); flex-shrink: 0; }
+.horse-location-text { font-size: 14px; font-weight: 400; color: var(--ink); letter-spacing: 0.3px; }
+.horse-location-region { font-size: 12px; font-weight: 300; color: var(--ink-light); margin-left: 4px; }
+.horse-location .flag-bubble { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); margin-left: 8px; }
+.horse-location .flag-bubble svg { width: 100%; height: 100%; display: block; }
 
 /* ─── GALLERY ─── */
 .horse-gallery { margin-bottom: 44px; position: relative; }
-
-.gallery-hero {
-  width: 100%; aspect-ratio: 16/9; overflow: hidden;
-  border-radius: 4px; margin-bottom: 6px;
-  background: linear-gradient(150deg, #edf2f5, #dde7ed);
-  position: relative; cursor: pointer;
-}
+.gallery-hero { width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 4px; margin-bottom: 6px; background: linear-gradient(150deg, #edf2f5, #dde7ed); position: relative; cursor: pointer; }
 .gallery-hero img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
 .gallery-hero:hover img { transform: scale(1.02); }
 
-/* Status badge — on the hero photo */
-.photo-status-badge {
-  position: absolute; top: 18px; left: 20px; z-index: 2;
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 20px;
-  padding: 6px 14px 6px 10px;
-  font-size: 10px; font-weight: 500; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--ink);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  pointer-events: none;
-}
-.status-dot {
-  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-}
-.status-dot.available {
-  background: #4caf7d;
-  box-shadow: 0 0 0 2px rgba(76,175,125,0.25);
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-.status-dot.pending  { background: #d4a843; }
-.status-dot.sold     { background: #9ba8b0; }
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 2px rgba(76,175,125,0.25); }
-  50%       { box-shadow: 0 0 0 5px rgba(76,175,125,0.1); }
-}
+/* Status badge — on hero photo */
+.photo-status-badge { position: absolute; top: 18px; left: 20px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6); border-radius: 20px; padding: 6px 14px 6px 10px; font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); box-shadow: 0 2px 12px rgba(0,0,0,0.12); pointer-events: none; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.status-dot.available { background: #4caf7d; box-shadow: 0 0 0 2px rgba(76,175,125,0.25); animation: pulse-dot 2s ease-in-out infinite; }
+.status-dot.pending { background: #d4a843; }
+.status-dot.sold { background: #9ba8b0; }
+@keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 0 2px rgba(76,175,125,0.25); } 50% { box-shadow: 0 0 0 5px rgba(76,175,125,0.1); } }
 
-/* placeholder */
 .ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; pointer-events: none; }
 .ph svg { opacity: 0.13; }
 .ph span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); opacity: 0.4; }
@@ -287,9 +275,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
   <div class="page-hero-content">
     <p class="page-hero-eyebrow">Icelandic Horses For Sale</p>
     <h1>Your new horse<br>is <em>right here</em></h1>
-    <p class="page-hero-sub">
-      We keep this list short on purpose. Every horse here is owned by us and sold by us directly. No brokers. No commissions. No hidden costs.
-    </p>
+    <p class="page-hero-sub">We keep this list short on purpose. Every horse here is owned by us and sold by us directly. No brokers. No commissions. No hidden costs.</p>
   </div>
 </div>
 
@@ -297,7 +283,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 <section class="listings-section">
   <div class="listings-inner">
 
-    <div class="listings-intro reveal" style="display: none;">
+    <div class="listings-intro reveal" style="display:none;">
       <p class="listings-count">2 Horses Available</p>
       <h2>Currently <em>for sale</em></h2>
       <p>We keep this list short on purpose. Every horse here is one we stand behind completely.</p>
@@ -309,11 +295,21 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
     ══════════════════════════════════════════ -->
     <div class="horse-listing reveal">
 
-      <!-- ① HEADER: name + subtitle only -->
+      <!-- ① HEADER -->
       <h2 class="horse-name">Humla <em>from Seliana</em></h2>
       <p class="horse-subtitle">US2023205989 &nbsp;·&nbsp; Dark Chestnut Filly &nbsp;·&nbsp; 3 Years Old</p>
 
-      <!-- ② GALLERY: status badge lives on the hero photo -->
+      <!-- ② LOCATION -->
+      <div class="horse-location">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <span class="horse-location-text">Canandaigua, New York</span>
+        <div class="flag-bubble" data-flag="us"></div>
+      </div>
+
+      <!-- ③ GALLERY -->
       <div class="horse-gallery">
         <div class="gallery-hero">
           <img src="humie-2-26.png" alt="Humla from Seliana">
@@ -332,7 +328,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
         </div>
       </div>
 
-      <!-- ③ STATS -->
+      <!-- ④ STATS -->
       <div class="horse-rule"></div>
       <div class="horse-stats">
         <div class="stat"><p class="stat-label">Born</p><p class="stat-value">May 2023</p></div>
@@ -343,14 +339,14 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
         <div class="stat"><p class="stat-label">BLUP</p><p class="stat-value">114</p></div>
       </div>
 
-      <!-- ④ DESCRIPTION -->
+      <!-- ⑤ DESCRIPTION -->
       <div class="horse-desc">
         <p>Humla is a beautiful dark chestnut filly with a star and snip — stout and well-built, with a broad back and chest. She's currently standing around 13.2 hands and expected to mature to approximately 13.3. She moves with a natural preference for lateral gaits, and is genetically five-gaited.</p>
         <p>Her sire, 1st prize Rauðskeggur frá Kjarnholtum (8.87), is one of the top ten highest-scoring stallions in Iceland today. Humla was imported in utero — giving her the rare advantage of elite Icelandic bloodlines that are typically unavailable to North American breeding programs, while still having the distinct benefits of being born and raised here.</p>
         <p>On the ground, Humla is unflappable and friendly, with an easy, social temperament that makes her a pleasure to be around. She's halter broke, trailers without fuss, and is excellent for groundwork and veterinary care — and whatever other tomfoolery her humans happen to dream up. She'll be ready to begin work under saddle next year, and would be an exceptional prospect for amateurs and professionals alike.</p>
       </div>
 
-      <!-- ⑤ CTA -->
+      <!-- ⑥ CTA -->
       <div class="horse-footer">
         <div>
           <p class="horse-price-label">Asking Price</p>
@@ -384,7 +380,17 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
       <h2 class="horse-name">Hljóð <em>from Seliana</em></h2>
       <p class="horse-subtitle">US2025206173 &nbsp;·&nbsp; Black Filly &nbsp;·&nbsp; Yearling</p>
 
-      <!-- ② GALLERY -->
+      <!-- ② LOCATION -->
+      <div class="horse-location">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <span class="horse-location-text">Canandaigua, New York</span>
+        <div class="flag-bubble" data-flag="us"></div>
+      </div>
+
+      <!-- ③ GALLERY -->
       <div class="horse-gallery">
         <div class="gallery-hero">
           <img src="hjlod2.jpg" alt="Hljóð from Seliana">
@@ -403,7 +409,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
         </div>
       </div>
 
-      <!-- ③ STATS -->
+      <!-- ④ STATS -->
       <div class="horse-rule"></div>
       <div class="horse-stats">
         <div class="stat"><p class="stat-label">Born</p><p class="stat-value">July 2025</p></div>
@@ -414,14 +420,14 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
         <div class="stat"><p class="stat-label">BLUP</p><p class="stat-value">115 (estimated)</p></div>
       </div>
 
-      <!-- ④ DESCRIPTION -->
+      <!-- ⑤ DESCRIPTION -->
       <div class="horse-desc">
         <p>Hljóð is a beautiful black filly, born July 29, 2025 — long-legged and refined, with an uphill build and elegant movement that already turns heads at liberty in the pasture. She shows all gaits freely in the field, with a clear preference for tölt. We expect her to mature to approximately 14 hands.</p>
         <p>Her sire, 1st prize Kiljan frá Korpu, is not only a talented sport horse but a stallion with an exceptional temperament — something he's proven in the best possible way, having been shown in competition by a youth rider and selected for the North American Youth Cup in 2025. That combination of talent and tractability is exactly what we look for, and it shows in Hljóð.</p>
         <p>She is up to date on farrier work, deworming, is halter broke, and received her first round of core vaccines in March 2026. Her exceptional movement and pedigree make her a rare opportunity for someone looking for a young horse with both sport and breeding potential — the kind of filly that doesn't come along often.</p>
       </div>
 
-      <!-- ⑤ CTA -->
+      <!-- ⑥ CTA -->
       <div class="horse-footer">
         <div>
           <p class="horse-price-label">Asking Price</p>
@@ -558,6 +564,33 @@ document.querySelectorAll('.horse-gallery').forEach(gallery => {
       cell.addEventListener('click', () => openLightbox(imgs, i));
     }
   });
+});
+
+// ── Flag bubbles ──
+const FLAGS = {
+  us: `<rect width="46" height="46" fill="#B22234"/>
+       <rect y="3.538"  width="46" height="3.538" fill="white"/>
+       <rect y="10.615" width="46" height="3.538" fill="white"/>
+       <rect y="17.692" width="46" height="3.538" fill="white"/>
+       <rect y="24.769" width="46" height="3.538" fill="white"/>
+       <rect y="31.846" width="46" height="3.538" fill="white"/>
+       <rect y="38.923" width="46" height="3.538" fill="white"/>
+       <rect width="19" height="24.769" fill="#3C3B6E"/>
+       <g fill="white">
+         <circle cx="2.1" cy="2.5" r="1"/><circle cx="5.9" cy="2.5" r="1"/><circle cx="9.7" cy="2.5" r="1"/><circle cx="13.5" cy="2.5" r="1"/><circle cx="17.3" cy="2.5" r="1"/>
+         <circle cx="4.0" cy="5.0" r="1"/><circle cx="7.8" cy="5.0" r="1"/><circle cx="11.6" cy="5.0" r="1"/><circle cx="15.4" cy="5.0" r="1"/>
+         <circle cx="2.1" cy="7.5" r="1"/><circle cx="5.9" cy="7.5" r="1"/><circle cx="9.7" cy="7.5" r="1"/><circle cx="13.5" cy="7.5" r="1"/><circle cx="17.3" cy="7.5" r="1"/>
+         <circle cx="4.0" cy="10.0" r="1"/><circle cx="7.8" cy="10.0" r="1"/><circle cx="11.6" cy="10.0" r="1"/><circle cx="15.4" cy="10.0" r="1"/>
+         <circle cx="2.1" cy="12.5" r="1"/><circle cx="5.9" cy="12.5" r="1"/><circle cx="9.7" cy="12.5" r="1"/><circle cx="13.5" cy="12.5" r="1"/><circle cx="17.3" cy="12.5" r="1"/>
+         <circle cx="4.0" cy="15.0" r="1"/><circle cx="7.8" cy="15.0" r="1"/><circle cx="11.6" cy="15.0" r="1"/><circle cx="15.4" cy="15.0" r="1"/>
+         <circle cx="2.1" cy="17.5" r="1"/><circle cx="5.9" cy="17.5" r="1"/><circle cx="9.7" cy="17.5" r="1"/><circle cx="13.5" cy="17.5" r="1"/><circle cx="17.3" cy="17.5" r="1"/>
+         <circle cx="4.0" cy="20.0" r="1"/><circle cx="7.8" cy="20.0" r="1"/><circle cx="11.6" cy="20.0" r="1"/><circle cx="15.4" cy="20.0" r="1"/>
+         <circle cx="2.1" cy="22.5" r="1"/><circle cx="5.9" cy="22.5" r="1"/><circle cx="9.7" cy="22.5" r="1"/><circle cx="13.5" cy="22.5" r="1"/><circle cx="17.3" cy="22.5" r="1"/>
+       </g>`,
+};
+document.querySelectorAll('.flag-bubble[data-flag]').forEach(el => {
+  const code = FLAGS[el.dataset.flag];
+  if (code) el.innerHTML = `<svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">${code}</svg>`;
 });
 
 // ── Reveal ──
