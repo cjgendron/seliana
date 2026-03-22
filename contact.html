@@ -42,41 +42,37 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 .page-hero h1 em { font-style: italic; color: var(--gold); }
 .page-hero-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 480px; line-height: 1.8; }
 
-/* CONTACT BODY */
+/* CONTACT LAYOUT */
 .contact-section { padding: 90px 60px 120px; }
 .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: start; }
 
 /* FORM */
-.form-block {}
 .form-block h2 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; margin-bottom: 10px; }
 .form-block h2 em { font-style: italic; color: var(--primary); }
 .form-lead { font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--ink-light); margin-bottom: 44px; }
 .contact-form { background: var(--neutral); border-radius: 18px; padding: 44px; border: 1px solid rgba(0,0,0,0.05); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
 .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
-.form-group:last-child { margin-bottom: 0; }
 .form-group label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); font-weight: 400; }
-.form-group input, .form-group select, .form-group textarea { background: var(--white); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 13px 16px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; color: var(--ink); outline: none; transition: border-color 0.2s; }
+.form-group input, .form-group select, .form-group textarea { background: var(--white); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 13px 16px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; color: var(--ink); outline: none; transition: border-color 0.2s; width: 100%; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
 .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(30,42,50,0.3); }
-.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group textarea { resize: vertical; min-height: 140px; }
 .form-submit { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; transition: background 0.2s, transform 0.2s; margin-top: 8px; }
 .form-submit:hover { background: var(--slate); transform: translateY(-1px); }
+.conditional-field { display: none; }
 
-/* SIDEBAR */
-.contact-sidebar {}
-.sidebar-block { margin-bottom: 40px; }
-.sidebar-block h4 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 18px; color: var(--ink); }
-.contact-detail { margin-bottom: 20px; }
-.cd-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 5px; }
-.cd-val { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--ink); }
-.sidebar-divider { height: 1px; background: rgba(0,0,0,0.07); margin: 36px 0; }
-.sidebar-quote { border-left: 2px solid var(--gold); padding-left: 20px; }
-.sidebar-quote p { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; font-weight: 300; color: var(--slate); line-height: 1.6; margin-bottom: 12px; }
-.sidebar-quote cite { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-light); font-style: normal; }
-.promise-list { list-style: none; }
-.promise-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; font-weight: 300; color: var(--ink-light); line-height: 1.6; margin-bottom: 14px; }
-.promise-list li::before { content: '◆'; font-size: 6px; color: var(--gold); margin-top: 6px; flex-shrink: 0; }
+/* SIDEBAR PHOTO */
+.contact-sidebar { position: sticky; top: 100px; }
+.sidebar-photo { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 32px rgba(30,42,50,0.12); }
+.sidebar-photo img { width: 100%; display: block; object-fit: cover; }
+.sidebar-photo-placeholder {
+  width: 100%; aspect-ratio: 3 / 4; min-height: 480px;
+  background: linear-gradient(150deg, #edf2f5, #e2eaef);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+}
+.sidebar-photo-placeholder svg { opacity: 0.2; }
+.sidebar-photo-placeholder span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); opacity: 0.5; font-weight: 400; }
 
 /* FOOTER */
 footer { background: var(--ink); padding: 64px 60px 32px; }
@@ -105,11 +101,13 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 @media (max-width: 900px) {
   nav { padding: 14px 24px; } .nav-links { display: none; } .nav-hamburger { display: flex; }
   .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+  .contact-sidebar { position: static; }
   .contact-section, .page-hero { padding-left: 24px; padding-right: 24px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
-  .form-row { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .sidebar-photo-placeholder { min-height: 300px; aspect-ratio: 4 / 3; }
 }
-@media (max-width: 600px) { footer { padding: 52px 24px 28px; } }
+@media (max-width: 600px) { footer { padding: 52px 24px 28px; } .footer-top { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -120,7 +118,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
     <div class="nav-logo-orn"><div class="nav-logo-orn-seg"></div><div class="nav-logo-orn-diamond"></div><div class="nav-logo-orn-seg"></div></div>
   </a>
   <div class="nav-links">
-    <a href="horses.html">Our Horses</a>
+    <a href="mares.html">Our Herd</a>
     <a href="journal.html">Journal</a>
     <a href="contact.html" class="nav-cta active">Inquire</a>
   </div>
@@ -132,7 +130,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
   <div class="page-hero-content">
     <p class="page-hero-eyebrow">Get in Touch</p>
     <h1>Let's find your<br><em>horse.</em></h1>
-    <p class="page-hero-sub">Tell us what you're looking for and a little about yourself. We reply to every inquiry personally, within 48 hours.</p>
+    <p class="page-hero-sub">Tell us what you're looking for and a little about yourself. We reply to every inquiry personally.</p>
   </div>
 </div>
 
@@ -142,65 +140,82 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
     <div class="form-block">
       <h2 class="reveal">Send us a<br><em>message.</em></h2>
       <p class="form-lead reveal">Whether you have a specific horse in mind or just want to start a conversation, we're glad you reached out.</p>
-      <div class="contact-form reveal">
-        <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" placeholder="Your first name"></div>
-          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
-          <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="(000) 000-0000"></div>
-        </div>
+
+      <form action="https://formspree.io/f/mbdzvjwy" method="POST" class="contact-form reveal">
+
         <div class="form-group">
-          <label>I'm interested in</label>
-          <select>
+          <label for="fname">Name</label>
+          <input type="text" id="fname" name="name" placeholder="Your full name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="femail">Email</label>
+            <input type="email" id="femail" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="fphone">Phone Number</label>
+            <input type="tel" id="fphone" name="phone" placeholder="(000) 000-0000" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="flocation">Location</label>
+          <input type="text" id="flocation" name="location" placeholder="City, State (or Country)">
+        </div>
+
+        <div class="form-group">
+          <label for="finterest">I'm Interested In&hellip;</label>
+          <select id="finterest" name="interest" onchange="handleInterest(this.value)" required>
             <option value="">Select one...</option>
-            <option>A specific horse on the site</option>
-            <option>A 2025 or 2026 foal</option>
-            <option>Breeding stock</option>
-            <option>A custom Iceland import</option>
-            <option>General information about the breed</option>
+            <option value="Buying a horse">Buying a horse</option>
+            <option value="Stallion service">Stallion service</option>
+            <option value="Import assistance">Import assistance</option>
+            <option value="Something else">Something else</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Your experience level</label>
-          <select>
-            <option value="">Select one...</option>
-            <option>New to horses</option>
-            <option>Some experience, new to Icelandics</option>
-            <option>Experienced with Icelandics</option>
-            <option>Competitive / professional rider</option>
+
+        <!-- Conditional: Buying a horse -->
+        <div class="form-group conditional-field" id="field-price-range">
+          <label for="fprice">Purchase Price Range</label>
+          <select id="fprice" name="price_range" disabled>
+            <option value="">Select a range...</option>
+            <option value="$5,000-$10,000">$5,000 &ndash; $10,000</option>
+            <option value="$10,000-$25,000">$10,000 &ndash; $25,000</option>
+            <option value="$25,000-$50,000">$25,000 &ndash; $50,000</option>
+            <option value="$50,000+">$50,000+</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Tell us about yourself</label>
-          <textarea placeholder="Your goals, your setup, what you're hoping to do with an Icelandic horse, your location — anything you'd like us to know."></textarea>
+
+        <!-- Conditional: Stallion service -->
+        <div class="form-group conditional-field" id="field-stallion">
+          <label for="fstallion">Stallion</label>
+          <select id="fstallion" name="stallion" disabled>
+            <option value="">Select a stallion...</option>
+            <option value="Svalur">Svalur frá Innri-Skeljabrekku</option>
+            <option value="Kiljan">Kiljan frá Korpu</option>
+            <option value="Berg-Steinn">Berg-Steinn frá Kjartansstöðum</option>
+            <option value="not sure">Not sure yet</option>
+          </select>
         </div>
-        <button class="form-submit">Send Inquiry →</button>
-      </div>
+        <div class="form-group conditional-field" id="field-mare-name">
+          <label for="fmare">Mare Name</label>
+          <input type="text" id="fmare" name="mare_name" placeholder="Your mare's registered name" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="fmessage">More Info</label>
+          <textarea id="fmessage" name="message" placeholder="Your goals, your setup, what you're hoping to do with an Icelandic horse — anything you'd like us to know."></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Send Inquiry &rarr;</button>
+
+      </form>
     </div>
 
     <div class="contact-sidebar reveal">
-      <div class="sidebar-block">
-        <h4>Reach us directly</h4>
-        <div class="contact-detail"><p class="cd-label">Email</p><p class="cd-val">hello@seliana.com</p></div>
-        <div class="contact-detail"><p class="cd-label">Phone</p><p class="cd-val">(555) 000-0000</p></div>
-        <div class="contact-detail"><p class="cd-label">Based in</p><p class="cd-val">United States</p></div>
-      </div>
-      <div class="sidebar-divider"></div>
-      <div class="sidebar-block">
-        <h4>What to expect</h4>
-        <ul class="promise-list">
-          <li>We reply to every inquiry within 48 hours — often same day.</li>
-          <li>We'll ask questions before we make suggestions. A good match matters more than a quick sale.</li>
-          <li>We can arrange video calls, farm visits, and trial periods where appropriate.</li>
-          <li>We handle transport coordination and paperwork, including across state lines.</li>
-        </ul>
-      </div>
-      <div class="sidebar-divider"></div>
-      <div class="sidebar-quote">
-        <p>"We don't move volume. We make matches. The right horse in the right hands — that's the whole point."</p>
-        <cite>— Seliana</cite>
+      <div class="sidebar-photo">
+        <img src="ofelia-2.jpg">
       </div>
     </div>
 
@@ -221,22 +236,45 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
       <div class="footer-col"><h5>Company</h5><a href="index.html">Home</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a></div>
       <div class="footer-col"><h5>Follow</h5><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a></div>
     </div>
-    <div class="footer-bottom"><p class="footer-copy">© 2026 Seliana. All rights reserved.</p><div class="footer-rule"></div></div>
+    <div class="footer-bottom"><p class="footer-copy">&copy; 2026 Seliana. All rights reserved.</p><div class="footer-rule"></div></div>
   </div>
 </footer>
 
 <script>
-const observer = new IntersectionObserver((entries) => { entries.forEach((e,i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i*80); observer.unobserve(e.target); } }); }, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) {
+      setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
 function toggleMenu() {
-  const links = document.querySelector('.nav-links'); const open = links.style.display === 'flex';
+  var links = document.querySelector('.nav-links');
+  var open = links.style.display === 'flex';
   links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);padding:32px;gap:22px;z-index:199;border-top:1px solid rgba(0,0,0,0.07);';
 }
-document.querySelector('.form-submit').addEventListener('click', function(e) {
-  this.textContent = 'Sent ✓';
-  this.style.background = '#4a8c6e';
-  setTimeout(() => { this.textContent = 'Send Inquiry →'; this.style.background = ''; }, 3000);
-});
+
+function handleInterest(val) {
+  var allConditional = ['field-price-range', 'field-stallion', 'field-mare-name'];
+  allConditional.forEach(function(id) {
+    var el = document.getElementById(id);
+    el.style.display = 'none';
+    el.querySelectorAll('input, select').forEach(function(f) { f.disabled = true; });
+  });
+
+  var toShow = [];
+  if (val === 'Buying a horse') toShow = ['field-price-range'];
+  if (val === 'Stallion service') toShow = ['field-stallion', 'field-mare-name'];
+
+  toShow.forEach(function(id) {
+    var el = document.getElementById(id);
+    el.style.display = 'flex';
+    el.querySelectorAll('input, select').forEach(function(f) { f.disabled = false; });
+  });
+}
 </script>
 </body>
 </html>
