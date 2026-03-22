@@ -26,12 +26,40 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 .nav-logo-orn { display: flex; align-items: center; }
 .nav-logo-orn-seg { height: 1px; background: var(--gold); flex: 1; opacity: 0.75; }
 .nav-logo-orn-diamond { width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; margin: 0 5px; }
-.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
 .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--ink-light); transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--gold); }
 .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 6px; }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+.nav-dropdown { position: relative; display: flex; align-items: center; }
+.nav-dropdown-trigger { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); transition: color 0.3s; cursor: pointer; display: flex; align-items: center; gap: 7px; background: none; border: none; font-family: 'Outfit', sans-serif; padding: 0; user-select: none; }
+.nav-dropdown-trigger:hover, .nav-dropdown-trigger.open { color: var(--gold); }
+.nav-chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.25s; display: inline-block; flex-shrink: 0; }
+.nav-dropdown-trigger.open .nav-chevron { transform: rotate(-135deg) translateY(-2px); }
+.nav-dropdown-menu { position: absolute; top: calc(100% + 18px); left: 50%; background: rgba(255,255,255,0.98); backdrop-filter: blur(14px); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; box-shadow: 0 8px 32px rgba(30,42,50,0.12); padding: 10px 0; min-width: 190px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateX(-50%) translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 9px; height: 9px; background: rgba(255,255,255,0.98); border-left: 1px solid rgba(201,168,76,0.2); border-top: 1px solid rgba(201,168,76,0.2); }
+.nav-dropdown.active .nav-dropdown-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.nav-dropdown-menu a { display: block; padding: 10px 24px; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-light) !important; text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap; }
+.nav-dropdown-menu a:hover { color: var(--gold) !important; background: rgba(201,168,76,0.05); }
+.nav-dropdown-menu a + a { border-top: 1px solid rgba(163,196,212,0.2); }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; z-index: 210; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.nav-mobile-drawer { display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 199; background: rgba(255,255,255,0.98); backdrop-filter: blur(18px); box-shadow: 0 4px 24px rgba(30,42,50,0.10); padding-bottom: 28px; transform: translateY(-100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+.nav-mobile-drawer.open { transform: translateY(0); }
+.nav-mobile-drawer-inner { padding: 0 28px; display: flex; flex-direction: column; }
+.nav-mobile-spacer { height: 72px; border-bottom: 1px solid rgba(163,196,212,0.25); margin-bottom: 8px; }
+.nav-mobile-drawer a, .nav-mobile-herd-trigger { font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: var(--ink-light); padding: 14px 0; border: none; border-bottom: 1px solid rgba(163,196,212,0.2); transition: color 0.2s; display: flex; align-items: center; justify-content: space-between; background: none; outline: none; font-family: 'Outfit', sans-serif; cursor: pointer; width: 100%; }
+.nav-mobile-drawer a:last-child { border-bottom: none; }
+.nav-mobile-drawer a:hover, .nav-mobile-herd-trigger:hover, .nav-mobile-drawer a.active { color: var(--gold); }
+.nav-mobile-herd-sub { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; display: flex; flex-direction: column; }
+.nav-mobile-herd-sub.open { max-height: 200px; }
+.nav-mobile-herd-sub a { padding: 11px 0 11px 18px; font-size: 10px; letter-spacing: 2.5px; border-bottom: 1px solid rgba(163,196,212,0.15); }
+.nav-mobile-herd-sub a:last-child { border-bottom: none; }
+.nav-mobile-drawer .nav-mobile-cta { margin-top: 20px; background: var(--gold) !important; color: var(--white) !important; padding: 13px 0; border-radius: 6px; text-align: center; justify-content: center; letter-spacing: 3px; border-bottom: none !important; }
+.nav-mobile-chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.25s; display: inline-block; flex-shrink: 0; }
+.nav-mobile-herd-trigger.open .nav-mobile-chevron { transform: rotate(-135deg) translateY(-2px); }
 
 /* PAGE HERO */
 .page-hero { background: var(--ink); padding: 140px 60px 80px; position: relative; overflow: hidden; }
@@ -99,7 +127,7 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 900px) {
-  nav { padding: 14px 24px; } .nav-links { display: none; } .nav-hamburger { display: flex; }
+  nav { padding: 14px 24px; } .nav-links { display: none; } .nav-hamburger { display: flex; } .nav-mobile-drawer { display: block; }
   .contact-inner { grid-template-columns: 1fr; gap: 48px; }
   .contact-sidebar { position: static; }
   .contact-section, .page-hero { padding-left: 24px; padding-right: 24px; }
@@ -112,18 +140,47 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 </head>
 <body>
 
-<nav>
+<!-- NAV -->
+<nav id="nav">
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-name"><span class="nav-logo-s">S</span><span class="nav-logo-rest"><span class="ke">E</span><span class="kl">L</span><span class="ki">I</span><span class="ka1">A</span><span class="kn">N</span><span class="ka2">A</span></span></div>
     <div class="nav-logo-orn"><div class="nav-logo-orn-seg"></div><div class="nav-logo-orn-diamond"></div><div class="nav-logo-orn-seg"></div></div>
   </a>
   <div class="nav-links">
-    <a href="mares.html">Our Herd</a>
+    <div class="nav-dropdown" id="herdDropdown">
+      <button class="nav-dropdown-trigger" id="herdTrigger" aria-haspopup="true" aria-expanded="false">
+        Our Herd <span class="nav-chevron"></span>
+      </button>
+      <div class="nav-dropdown-menu" role="menu">
+        <a href="mares.html" role="menuitem">Mares</a>
+        <a href="stallions.html" role="menuitem">Stallions</a>
+      </div>
+    </div>
+    <a href="for-sale.html">Horses For Sale</a>
+    <a href="sold.html">Sold Horses</a>
+    <a href="testimonials.html">Testimonials</a>
     <a href="journal.html">Journal</a>
     <a href="contact.html" class="nav-cta active">Inquire</a>
   </div>
-  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-mobile-drawer" id="mobileDrawer">
+  <div class="nav-mobile-drawer-inner">
+    <div class="nav-mobile-spacer"></div>
+    <button class="nav-mobile-herd-trigger" id="mobileHerdTrigger">Our Herd <span class="nav-mobile-chevron"></span></button>
+    <div class="nav-mobile-herd-sub" id="mobileHerdSub">
+      <a href="mares.html">Mares</a>
+      <a href="stallions.html">Stallions</a>
+    </div>
+    <a href="for-sale.html">Horses For Sale</a>
+    <a href="sold.html">Sold Horses</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html" class="nav-mobile-cta">Inquire</a>
+  </div>
+</div>
 
 <div class="page-hero">
   <div class="page-hero-bg"></div>
@@ -192,9 +249,9 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
           <label for="fstallion">Stallion</label>
           <select id="fstallion" name="stallion" disabled>
             <option value="">Select a stallion...</option>
-            <option value="Svalur">Svalur frá Innri-Skeljabrekku</option>
-            <option value="Kiljan">Kiljan frá Korpu</option>
-            <option value="Berg-Steinn">Berg-Steinn frá Kjartansstöðum</option>
+            <option value="Svalur">Svalur fr&aacute; Innri-Skeljabrekku</option>
+            <option value="Kiljan">Kiljan fr&aacute; Korpu</option>
+            <option value="Berg-Steinn">Berg-Steinn fr&aacute; Kjartansstoðum</option>
             <option value="not sure">Not sure yet</option>
           </select>
         </div>
@@ -241,6 +298,43 @@ footer { background: var(--ink); padding: 64px 60px 32px; }
 </footer>
 
 <script>
+// ── Nav ──
+var herdDropdown = document.getElementById('herdDropdown');
+var herdTrigger  = document.getElementById('herdTrigger');
+herdTrigger.addEventListener('click', function(e) {
+  e.stopPropagation();
+  var open = herdDropdown.classList.toggle('active');
+  herdTrigger.classList.toggle('open', open);
+  herdTrigger.setAttribute('aria-expanded', open);
+});
+document.addEventListener('click', function() {
+  herdDropdown.classList.remove('active');
+  herdTrigger.classList.remove('open');
+});
+herdDropdown.querySelector('.nav-dropdown-menu').addEventListener('click', function(e) { e.stopPropagation(); });
+
+var hamburger      = document.getElementById('hamburger');
+var mobileDrawer   = document.getElementById('mobileDrawer');
+var mobileHerdTrig = document.getElementById('mobileHerdTrigger');
+var mobileHerdSub  = document.getElementById('mobileHerdSub');
+hamburger.addEventListener('click', function() {
+  var open = mobileDrawer.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+mobileHerdTrig.addEventListener('click', function() {
+  var open = mobileHerdSub.classList.toggle('open');
+  mobileHerdTrig.classList.toggle('open', open);
+});
+mobileDrawer.querySelectorAll('a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    mobileDrawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+// ── Reveal ──
 var observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(e, i) {
     if (e.isIntersecting) {
@@ -251,12 +345,7 @@ var observer = new IntersectionObserver(function(entries) {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 
-function toggleMenu() {
-  var links = document.querySelector('.nav-links');
-  var open = links.style.display === 'flex';
-  links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);padding:32px;gap:22px;z-index:199;border-top:1px solid rgba(0,0,0,0.07);';
-}
-
+// ── Conditional form fields ──
 function handleInterest(val) {
   var allConditional = ['field-price-range', 'field-stallion', 'field-mare-name'];
   allConditional.forEach(function(id) {
